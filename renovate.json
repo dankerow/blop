@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    "group:allNonMajor"
+  ],
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "bump",
+  "commitMessageExtra": "to {{newValue}}",
+  "commitMessageTopic": "{{depName}}",
+  "dependencyDashboard": true,
+  "rebaseWhen": "conflicted",
+  "ignoreDeps": [],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["eslint"],
+      "labels": ["dependencies", "linting"]
+    }
+  ],
+  "prConcurrentLimit": 30,
+  "rangeStrategy": "bump"
+}
