@@ -1,0 +1,30 @@
+{
+  "name": "blop",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A Discord bot made with discord.js",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "start": "tsx .",
+    "start:staging": "pm2 start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "author": "Dan Mutombo",
+  "dependencies": {
+    "consola": "^3.2.3",
+    "discord.js": "^14.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.52.0",
+    "eslint-plugin-import": "^2.29.0",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  },
+  "packageManager": "pnpm@8.10.0"
+}
