@@ -1,9 +1,12 @@
-import type { Config } from '@/types'
+import type { ResolvedConfig } from '@/utils/configLoader'
 import type { ConsolaInstance } from 'consola'
 
-import config from '@/config'
+import _config from '@/config'
+import { loadConfig } from '@/utils/configLoader'
 import { Client, GatewayIntentBits, Options, Partials } from 'discord.js'
 import { consola } from 'consola'
+
+const config = await loadConfig('.', _config)
 
 /**
  * @description The client instance
@@ -12,7 +15,7 @@ import { consola } from 'consola'
  */
 export class Blop extends Client<true> {
   public logger: ConsolaInstance
-  public config: Config
+  public config: ResolvedConfig
   constructor() {
     super({
       allowedMentions: {
