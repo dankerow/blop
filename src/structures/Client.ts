@@ -1,4 +1,4 @@
-import type { DiscordClientConfig } from '@/types'
+import type { Config } from '@/types'
 import type { ConsolaInstance } from 'consola'
 
 import config from '@/config'
@@ -12,7 +12,7 @@ import { consola } from 'consola'
  */
 export class Blop extends Client<true> {
   public logger: ConsolaInstance
-  public config: DiscordClientConfig
+  public config: Config
   constructor() {
     super({
       allowedMentions: {
