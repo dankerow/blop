@@ -1,12 +1,13 @@
 import type { Command } from '@/structures'
 import type { ResolvedConfig } from '@/utils/configLoader'
+import type { APIApplicationCommand } from 'discord.js'
 import type { ConsolaInstance } from 'consola'
 
 import _config from '@/config'
 import { loadConfig } from '@/utils/configLoader'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
-import { Client, GatewayIntentBits, Options, Partials } from 'discord.js'
+import { Client, GatewayIntentBits, Options, Partials, REST, Routes } from 'discord.js'
 import { consola } from 'consola'
 
 const config = await loadConfig('.', _config)
@@ -70,9 +71,13 @@ export class Blop extends Client<true> {
     // Enable warning logger provided by Discord.js
     this.on('warn', (warn) => this.logger.warn(warn))
 
+    await this.commandsModulesLoader()
+
     await this.login(DISCORD_CLIENT_TOKEN)
       .then(() => this.logger.info(`[Shard #${this.shard!.ids[0]}] Connected to the WebSocket.`))
       .catch(() => this.logger.error(`[Shard #${this.shard!.ids[0]}] Connection to the WebSocket failed.`))
+
+    await this.registerCommands()
   }
 
   /**
@@ -112,6 +117,28 @@ export class Blop extends Client<true> {
 
     const end = process.hrtime(start)
     console.log(`[Shard #${this.shard!.ids[0]}] Loaded ${this.commands.length}/${totalCommands} commands (took ${(end[1] / 1000000).toFixed()}ms)`)
+  }
+
+  /**
+   * @description Register all commands to the Discord API
+   * @returns {Promise<void>}
+   */
+  async registerCommands(): Promise<void> {
+    const rest = new REST().setToken(process.env.BOT_TOKEN ?? '')
+    const commands = this.commands.map((command) => command.applicationCommandBody)
+
+    try {
+      consola.log(`Started refreshing ${this.commands.length} application (/) commands.`)
+
+      const data = await rest.put(
+        Routes.applicationCommands(this.user.id),
+        { body: commands }
+      ) as APIApplicationCommand[]
+
+      consola.log(`Successfully reloaded ${data.length} application (/) commands.`)
+    } catch (error) {
+      consola.error(error)
+    }
   }
 }
 
