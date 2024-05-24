@@ -1,4 +1,4 @@
-import type { CommandContext, CommandOptions, PartialCommandContext } from '@/types'
+import type { CommandContext, CommandOptions, PartialCommandContext, CommandOutput } from '@/types'
 import type { Blop } from '@/structures'
 import type { APIApplicationCommandOption, APIEmbed } from 'discord.js'
 
@@ -67,7 +67,7 @@ export class Command {
    * @param {CommandContext} context - The command context.
    * @throws {Error} If the command doesn't have an execute method.
    */
-  execute(context: CommandContext): string | { content?: string; embeds?: APIEmbed[]; files?: any[]; components?: any[] } | null | undefined | void | Promise<string | { content?: string; embeds?: APIEmbed[]; files?: any[]; components?: any[] } | null | undefined | void> {
+  execute(context: CommandContext): CommandOutput {
     throw new Error(`${this.name} doesn't have an execute() method.`)
   }
 }
