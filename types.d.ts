@@ -1,6 +1,7 @@
 import type { Blop } from '@/structures'
 import type {
   APIApplicationCommandOption,
+  APIEmbed,
   ChatInputCommandInteraction,
   Snowflake
 } from 'discord.js'
@@ -29,3 +30,5 @@ export interface PartialCommandContext {
   client: Blop
   interaction?: ChatInputCommandInteraction<'cached'>
 }
+
+export type CommandOutput = string | { content?: string; embeds?: APIEmbed[]; files?: any[]; components?: any[] } | null | undefined | void | Promise<string | { content?: string; embeds?: APIEmbed[]; files?: any[]; components?: any[] } | null | undefined | void>
