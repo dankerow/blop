@@ -100,7 +100,7 @@ export class Blop extends Client<true> {
           try {
             totalCommands++
 
-            const commandPath = join(this.config.dirs.commands, categoryName, commandFileName);
+            const commandPath = join(this.config.dirs.commands, categoryName, commandFileName)
             const commandPathUrl = pathToFileURL(commandPath).href
 
             const CommandImport = await import(commandPathUrl) as { default: new (...args: any[]) => Command }
