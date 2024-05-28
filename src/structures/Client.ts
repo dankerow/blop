@@ -1,6 +1,6 @@
-import type { Command } from '@/structures'
+import type { Command, Event } from '@/structures'
 import type { ResolvedConfig } from '@/utils/configLoader'
-import type { APIApplicationCommand } from 'discord.js'
+import type { APIApplicationCommand, ClientEvents } from 'discord.js'
 import type { ConsolaInstance } from 'consola'
 
 import _config from '@/config'
@@ -22,6 +22,7 @@ export class Blop extends Client<true> {
   public logger: ConsolaInstance
   public config: ResolvedConfig
   public commands: Command[]
+  private readonly events: { [K in keyof ClientEvents]: (...args: any[]) => void }
   constructor() {
     super({
       allowedMentions: {
@@ -49,6 +50,7 @@ export class Blop extends Client<true> {
     this.config = config
 
     this.commands = []
+    this.events = {} as { [K in keyof ClientEvents]: (...args: any[]) => void }
 
     this.start()
   }
@@ -73,6 +75,7 @@ export class Blop extends Client<true> {
     this.on('warn', (warn) => this.logger.warn(warn))
 
     await this.commandsModulesLoader()
+    await this.eventModulesLoader()
 
     await this.login(DISCORD_CLIENT_TOKEN)
       .then(() => this.logger.info(`[Shard #${this.shard!.ids[0]}] Connected to the WebSocket.`))
@@ -143,6 +146,47 @@ export class Blop extends Client<true> {
     } catch (error) {
       this.logger.error(error)
     }
+  }
+
+  /**
+   * @description Load all Discord event modules
+   * @private
+   * @returns {void}
+   */
+  private async eventModulesLoader(): Promise<void> {
+    const start = process.hrtime()
+    const eventFileNames = await readdir(this.config.dirs.events)
+
+    for (const eventFileName of eventFileNames) {
+      const moduleName = eventFileName.split('.')[0] as keyof ClientEvents
+
+      if (!moduleName) {
+        this.logger.error(`[Shard #${this.shard!.ids[0]}] Invalid event name: ${eventFileName.split('.')[0]}`)
+        continue
+      }
+
+      try {
+        const eventPath = join(this.config.dirs.events, eventFileName)
+        const eventPathUrl = pathToFileURL(eventPath).href
+
+        const eventImport = await import(eventPathUrl) as { default: new (...args: ClientEvents[]) => Event }
+        const EventClass = eventImport.default
+        const event = new EventClass()
+
+        this.events[moduleName] = event.handle.bind(event, this)
+
+        if (event.once) {
+          this.once(moduleName, this.events[moduleName])
+        } else {
+          this.on(moduleName, this.events[moduleName])
+        }
+      } catch (error: any) {
+        this.logger.error(`[Shard #${this.shard!.ids[0]}] Unable to load event ${moduleName}: ${error instanceof Error ? error.stack : error}`)
+      }
+    }
+
+    const end = process.hrtime(start)
+    this.logger.info(`[Shard #${this.shard!.ids[0]}] Loaded ${Object.keys(this.events).length}/${eventFileNames.length} events (took ${(end[1] / 1000000).toFixed()}ms)`)
   }
 }
 
