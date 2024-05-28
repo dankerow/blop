@@ -7,6 +7,7 @@ import _config from '@/config'
 import { loadConfig } from '@/utils/configLoader'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { Client, GatewayIntentBits, Options, Partials, REST, Routes } from 'discord.js'
 import { consola } from 'consola'
 
@@ -90,7 +91,7 @@ export class Blop extends Client<true> {
     const start = process.hrtime()
 
     try {
-      const categoryNames = await readdir(join(this.config.dirs.commands))
+      const categoryNames = await readdir(this.config.dirs.commands)
 
       for (const categoryName of categoryNames) {
         const commandFileNames = await readdir(join(this.config.dirs.commands, categoryName))
@@ -99,7 +100,10 @@ export class Blop extends Client<true> {
           try {
             totalCommands++
 
-            const CommandImport = await import(join(this.config.dirs.commands, categoryName, commandFileName)) as { default: new (...args: any[]) => Command }
+            const commandPath = join(this.config.dirs.commands, categoryName, commandFileName);
+            const commandPathUrl = pathToFileURL(commandPath).href
+
+            const CommandImport = await import(commandPathUrl) as { default: new (...args: any[]) => Command }
             const CommandClass = CommandImport.default
             const command: Command = new CommandClass(this)
 
