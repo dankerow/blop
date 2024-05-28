@@ -1,6 +1,6 @@
 import type { CommandContext, CommandOptions, PartialCommandContext, CommandOutput } from '@/types'
 import type { Blop } from '@/structures'
-import type { APIApplicationCommandOption, APIEmbed } from 'discord.js'
+import type { APIApplicationCommandOption } from 'discord.js'
 
 /**
  * Command class represents a command in the application.
