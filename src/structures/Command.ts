@@ -67,6 +67,7 @@ export class Command {
    * @param {CommandContext} context - The command context.
    * @throws {Error} If the command doesn't have an execute method.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   execute(context: CommandContext): CommandOutput {
     throw new Error(`${this.name} doesn't have an execute() method.`)
   }
