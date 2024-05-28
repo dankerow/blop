@@ -111,16 +111,16 @@ export class Blop extends Client<true> {
 
             this.commands.push(command)
           } catch (error: any) {
-            console.error(`[Shard #${this.shard!.ids[0]}] Unable to load command ${commandFileName}: ${error instanceof Error ? error.stack : error}`)
+            this.logger.error(`[Shard #${this.shard!.ids[0]}] Unable to load command ${commandFileName}: ${error instanceof Error ? error.stack : error}`)
           }
         }
       }
     } catch (error: any) {
-      console.error(`[Shard #${this.shard!.ids[0]}] Unable to load some commands: ${error instanceof Error ? error.stack : error}`)
+      this.logger.error(`[Shard #${this.shard!.ids[0]}] Unable to load some commands: ${error instanceof Error ? error.stack : error}`)
     }
 
     const end = process.hrtime(start)
-    console.log(`[Shard #${this.shard!.ids[0]}] Loaded ${this.commands.length}/${totalCommands} commands (took ${(end[1] / 1000000).toFixed()}ms)`)
+    this.logger.info(`[Shard #${this.shard!.ids[0]}] Loaded ${this.commands.length}/${totalCommands} commands (took ${(end[1] / 1000000).toFixed()}ms)`)
   }
 
   /**
@@ -132,16 +132,16 @@ export class Blop extends Client<true> {
     const commands = this.commands.map((command) => command.applicationCommandBody)
 
     try {
-      consola.log(`Started refreshing ${this.commands.length} application (/) commands.`)
+      this.logger.info(`Started refreshing ${this.commands.length} application (/) commands.`)
 
       const data = await rest.put(
         Routes.applicationCommands(this.user.id),
         { body: commands }
       ) as APIApplicationCommand[]
 
-      consola.log(`Successfully reloaded ${data.length} application (/) commands.`)
+      this.logger.info(`Successfully reloaded ${data.length} application (/) commands.`)
     } catch (error) {
-      consola.error(error)
+      this.logger.error(error)
     }
   }
 }
