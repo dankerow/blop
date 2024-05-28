@@ -128,7 +128,7 @@ export class Blop extends Client<true> {
    * @returns {Promise<void>}
    */
   async registerCommands(): Promise<void> {
-    const rest = new REST().setToken(process.env.BOT_TOKEN ?? '')
+    const rest = new REST().setToken(process.env.DISCORD_CLIENT_TOKEN ?? '')
     const commands = this.commands.map((command) => command.applicationCommandBody)
 
     try {
