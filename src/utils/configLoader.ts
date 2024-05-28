@@ -25,10 +25,6 @@ export function resolveConfig(
     ...config
   }
 
-  _config.dirs = {
-    commands: resolve(config.dirs.commands)
-  }
-
   return _config
 }
 
