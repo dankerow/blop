@@ -49,7 +49,8 @@ export async function loadConfig(
     defaults: {
       maintenance: false,
       dirs: {
-        commands: 'src/commands'
+        commands: 'src/commands',
+        events: 'src/events'
       },
       maintainers: []
     }

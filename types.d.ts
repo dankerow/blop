@@ -9,6 +9,7 @@ import type {
 export interface Config {
   dirs?: {
     commands?: string
+    events?: string
   }
   maintainers?: Snowflake[]
 }
