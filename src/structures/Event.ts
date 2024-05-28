@@ -23,8 +23,8 @@ export class Event {
    * @param {boolean} options.once - A boolean indicating whether the event should only be handled once.
    */
   constructor(name: string, options: { once?: boolean } = {}) {
-    this.name = name;
-    if (options.once) this.once = options.once;
+    this.name = name
+    if (options.once) this.once = options.once
   }
 
   /**
@@ -35,6 +35,6 @@ export class Event {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handle(...args: any[]) {
-    throw new Error(`${this.name} doesn't have an handle() method.`);
+    throw new Error(`${this.name} doesn't have an handle() method.`)
   }
 }
