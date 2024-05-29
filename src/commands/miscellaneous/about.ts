@@ -23,7 +23,16 @@ export default class About extends Command {
   }
 
   async execute({ client, interaction }: CommandContext) {
-    const maintainers = client.config.maintainers.map(async (maintainer) => client.users.cache.has(maintainer) ? client.users.cache.get(maintainer)!.tag : (await client.users.fetch(maintainer)).tag).join(', ')
+    const maintainersPromises = client.config.maintainers.map(async (maintainer) => {
+      if (client.users.cache.has(maintainer)) {
+        return client.users.cache.get(maintainer)!.tag
+      } else {
+        const user = await client.users.fetch(maintainer)
+        return user.tag
+      }
+    })
+
+    const maintainers = (await Promise.all(maintainersPromises)).join(', ')
 
     let users = client.shard ? await client.shard.broadcastEval(client => client.users.cache.size) : client.users.cache.size
     if (users instanceof Array) {
