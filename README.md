@@ -1,7 +1,7 @@
 ## Blop
 A Discord bot made with discord.js
 
-[![Blop](https://img.shields.io/badge/Blop-v1.0.0-red.svg)](https://danmutombo.com/)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/dankerow/blop)
 
 ## Setup
 
