@@ -33,6 +33,13 @@ export class Command {
   public description: (context: CommandContext | PartialCommandContext) => string
 
   /**
+   * The cooldown period for the command in milliseconds.
+   * This property determines the minimum amount of time that must pass
+   * before the command can be executed again.
+   */
+  public cooldown: number
+
+  /**
    * The body of the application command.
    */
   public applicationCommandBody: {
@@ -60,6 +67,8 @@ export class Command {
       options: options.options ?? [],
       dm_permission: false
     }
+
+    this.cooldown = options.cooldown || 2500
   }
 
   /**
