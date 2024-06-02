@@ -20,6 +20,7 @@ export interface CommandOptions {
   category?: string
   description: (context: CommandContext | PartialCommandContext) => string
   options?: APIApplicationCommandOption[]
+  cooldown?: number
 }
 
 export interface CommandContext {
