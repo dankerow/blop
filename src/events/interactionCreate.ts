@@ -1,8 +1,9 @@
 import type { CommandOutput } from '@/types'
 import type { Blop } from '@/structures'
-import type { ChatInputCommandInteraction, InteractionResponse, Message } from 'discord.js'
+import type { ChatInputCommandInteraction, InteractionResponse, Snowflake, Message } from 'discord.js'
 
 import { Event } from '@/structures'
+import { Collection } from 'discord.js'
 
 /**
  * @class InteractionCreate
@@ -13,10 +14,24 @@ export default class InteractionCreate extends Event {
    * @description The output of the command execution.
    */
   private output: CommandOutput
+
+  /**
+   * @property {Collection<Snowflake, number>} cooldowns
+   * @description The cooldowns collection.
+   */
+  private readonly cooldowns: Collection<Snowflake, number>
+
+  /**
+   * @property {NodeJS.Timeout} cooldownSweep
+   * @description The cooldown sweep interval.
+   */
+  protected cooldownSweep: NodeJS.Timeout
   constructor() {
     super('interactionCreate')
 
     this.output = null
+    this.cooldowns = new Collection()
+    this.cooldownSweep = setInterval(this.sweepCooldowns.bind(this), 60000 * 30)
   }
 
   async handle(client: Blop, interaction: ChatInputCommandInteraction<'cached'>): Promise<void | InteractionResponse | Message> {
@@ -28,6 +43,13 @@ export default class InteractionCreate extends Event {
       if (!command) return
 
       client.logger.log(`[Shard #${interaction.guild.shardId}] ${interaction.user.tag}(${interaction.user.id}) ran command ${command.name} on ${interaction.guild.name}(${interaction.guild.id}) in #${interaction.channel?.name}(${interaction.channel!.id}).`)
+
+      if (this.cooldowns.has(interaction.user.id) && this.cooldowns.get(interaction.user.id)! > Date.now()) {
+        await this.userInCooldown(interaction)
+        return
+      }
+
+      this.cooldowns.set(interaction.user.id, Date.now() + (command.cooldown ? command.cooldown : 2000))
 
       try {
         this.output = await command.execute({ client, interaction })
@@ -59,6 +81,31 @@ export default class InteractionCreate extends Event {
       }
     } catch (error: any) {
       return client.logger.error(`[Shard #${interaction.guild.shardId}] ${this.name} - ${error instanceof Error ? error.stack : error}`)
+    }
+  }
+
+  /**
+   * @method sweepCooldowns
+   * @description Sweeps expired cooldowns.
+   */
+  private sweepCooldowns() {
+    for (const [key, value] of this.cooldowns) {
+      if (value < Date.now()) this.cooldowns.delete(key)
+    }
+  }
+
+  /**
+   * @param {ChatInputCommandInteraction} interaction The interaction
+   * @returns {Promise<Message<true>>} The message
+   */
+  private async userInCooldown(interaction: ChatInputCommandInteraction<'cached'>): Promise<InteractionResponse<true>> {
+    const userCooldown = this.cooldowns.get(interaction.user.id)!
+    const seconds = Math.round((userCooldown - Date.now()) / 1000)
+
+    try {
+      return interaction.reply(`'You are in the cooldown zone, please wait another ${seconds > 1 ? `${seconds} seconds` : 'another second' }.`)
+    } catch (e) {
+      return interaction.reply('\uD83D\uDEA7 An error occurred. Try again later.')
     }
   }
 }
