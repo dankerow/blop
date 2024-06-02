@@ -2,6 +2,8 @@
 A Discord bot made with discord.js
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/dankerow/blop)
+![GitHub License](https://img.shields.io/github/license/dankerow/blop)
+
 
 ## Setup
 
