@@ -20,6 +20,7 @@ export interface CommandOptions {
   category?: string
   description: (context: CommandContext | PartialCommandContext) => string
   options?: APIApplicationCommandOption[]
+  disabled?: boolean
   cooldown?: number
 }
 

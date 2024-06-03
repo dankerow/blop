@@ -42,6 +42,10 @@ export default class InteractionCreate extends Event {
 
       if (!command) return
 
+      if (command.disabled && !client.config.maintainers.includes(interaction.user.id)) {
+        return interaction.reply(':x: This command is disabled at the moment.')
+      }
+
       client.logger.log(`[Shard #${interaction.guild.shardId}] ${interaction.user.tag}(${interaction.user.id}) ran command ${command.name} on ${interaction.guild.name}(${interaction.guild.id}) in #${interaction.channel?.name}(${interaction.channel!.id}).`)
 
       if (this.cooldowns.has(interaction.user.id) && this.cooldowns.get(interaction.user.id)! > Date.now()) {

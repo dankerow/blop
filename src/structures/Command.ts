@@ -33,6 +33,13 @@ export class Command {
   public description: (context: CommandContext | PartialCommandContext) => string
 
   /**
+   * Indicates whether the command is disabled.
+   * If true, the command will not be available for use.
+   * @default false
+   */
+  public disabled: boolean
+
+  /**
    * The cooldown period for the command in milliseconds.
    * This property determines the minimum amount of time that must pass
    * before the command can be executed again.
@@ -68,6 +75,7 @@ export class Command {
       dm_permission: false
     }
 
+    this.disabled = options.disabled || false
     this.cooldown = options.cooldown || 2500
   }
 
