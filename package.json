@@ -14,19 +14,19 @@
   "author": "Dan Mutombo",
   "dependencies": {
     "consola": "^3.2.3",
-    "discord.js": "^14.15.2"
+    "discord.js": "^14.15.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
-    "@stylistic/eslint-plugin-ts": "^2.1.0",
-    "@types/node": "^20.13.0",
-    "c12": "^1.10.0",
+    "@eslint/js": "^9.7.0",
+    "@stylistic/eslint-plugin-ts": "^2.3.0",
+    "@types/node": "^20.14.10",
+    "c12": "^1.11.1",
     "dotenv": "^16.4.5",
-    "eslint": "^9.4.0",
+    "eslint": "^9.7.0",
     "eslint-plugin-import": "^2.29.1",
-    "tsx": "^4.11.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^7.11.0"
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0"
   },
-  "packageManager": "pnpm@9.1.4"
+  "packageManager": "pnpm@9.5.0"
 }
