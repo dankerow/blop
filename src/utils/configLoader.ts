@@ -56,5 +56,5 @@ export async function loadConfig(
     }
   })
 
-  return resolveConfig(config as Config)
+  return resolveConfig(config)
 }
