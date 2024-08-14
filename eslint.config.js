@@ -40,14 +40,6 @@ export default tseslint.config(
       '@typescript-eslint/ban-ts-comment': [
         'error', { 'ts-ignore': 'allow-with-description' }
       ],
-      '@typescript-eslint/member-delimiter-style': [
-        'error',
-        { multiline: { delimiter: 'none' } }
-      ],
-      '@typescript-eslint/type-annotation-spacing': [
-        'error',
-        {}
-      ],
       '@typescript-eslint/consistent-type-imports': [
         'error', { 'prefer': 'type-imports', disallowTypeAnnotations: false }
       ],
@@ -148,6 +140,11 @@ export default tseslint.config(
         'error'
       ],
 
+      '@stylistic/ts/member-delimiter-style': [
+        'error',
+        { multiline: { delimiter: 'none' } }
+      ],
+
       '@stylistic/ts/object-curly-spacing': [
         'error',
         'always'
@@ -156,6 +153,11 @@ export default tseslint.config(
       '@stylistic/ts/semi': [
         'error',
         'never'
+      ],
+
+      '@stylistic/ts/type-annotation-spacing': [
+        'error',
+        {}
       ],
 
       '@stylistic/ts/quotes': [
