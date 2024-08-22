@@ -1,6 +1,45 @@
 # Changelog
 
 
+## v0.2.1
+
+[compare changes](https://github.com/dankerow/blop/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements
+
+- Implement command interaction cooldown (rate limit) ([#12](https://github.com/dankerow/blop/pull/12))
+- Add possibility to disable commands ([1fc48a6](https://github.com/dankerow/blop/commit/1fc48a6))
+- **commands:** Add help command ([260203c](https://github.com/dankerow/blop/commit/260203c))
+- **commands:** Add avatar command ([777cb2f](https://github.com/dankerow/blop/commit/777cb2f))
+- **utils:** Add trimArray function ([451268a](https://github.com/dankerow/blop/commit/451268a))
+- **commands:** Add guild command ([fadfbac](https://github.com/dankerow/blop/commit/fadfbac))
+- **utils:** Add getSystemUptime function ([847ec56](https://github.com/dankerow/blop/commit/847ec56))
+- **commands:** Add uptime command ([84fe228](https://github.com/dankerow/blop/commit/84fe228))
+
+### 🩹 Fixes
+
+- Resolve promise correctly in maintainers fetching ([3f22575](https://github.com/dankerow/blop/commit/3f22575))
+- Unnecessary type assertion ([782a07b](https://github.com/dankerow/blop/commit/782a07b))
+
+### 💅 Refactors
+
+- Update Event class handle method signature ([2d4dae6](https://github.com/dankerow/blop/commit/2d4dae6))
+
+### 📖 Documentation
+
+- Update add package.json version badge ([ec8e1a4](https://github.com/dankerow/blop/commit/ec8e1a4))
+- Add GitHub license ([29bad6c](https://github.com/dankerow/blop/commit/29bad6c))
+- Add instructions to setup the env file ([16d030c](https://github.com/dankerow/blop/commit/16d030c))
+- Add instructions to run the bot ([572c200](https://github.com/dankerow/blop/commit/572c200))
+
+### 🏡 Chore
+
+- Update eslint configuration ([922f41a](https://github.com/dankerow/blop/commit/922f41a))
+
+### ❤️ Contributors
+
+- Dan <danker.twist@gmail.com>
+
 ## v0.2.0
 
 

@@ -1,7 +1,7 @@
 {
   "name": "blop",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Discord bot made with discord.js",
   "main": "src/main.ts",
   "type": "module",
@@ -9,7 +9,8 @@
     "start": "tsx .",
     "start:staging": "pm2 start",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "release": "npx changelogen@latest --release"
   },
   "author": "Dan Mutombo",
   "dependencies": {
