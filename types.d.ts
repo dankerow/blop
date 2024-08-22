@@ -6,12 +6,19 @@ import type {
   Snowflake
 } from 'discord.js'
 
+interface APIItem {
+  baseUrl: string
+}
+
+type APIList = Record<string, APIItem>
+
 export interface Config {
   dirs?: {
     commands?: string
     events?: string
   }
   maintainers?: Snowflake[]
+  apis?: APIList
 }
 
 export interface CommandOptions {
