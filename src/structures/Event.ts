@@ -1,3 +1,5 @@
+import type { InteractionResponse, Message } from 'discord.js';
+
 /**
  * @class Event
  * @description This class represents an event in the application based on Discord bot client events.
@@ -34,7 +36,7 @@ export class Event {
    * @throws {Error} Throws an error if the method is not overridden in a subclass.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  handle(...args: any[]) {
+  handle(...args: any[]): void | Promise<void | InteractionResponse | Message> {
     throw new Error(`${this.name} doesn't have an handle() method.`)
   }
 }
