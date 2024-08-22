@@ -24,6 +24,17 @@ Rename the `.env.example` file to `.env` in the root directory and update the va
 DISCORD_CLIENT_TOKEN=your_discord_bot_token
 ```
 
+## Running
+
+```bash
+# yarn
+yarn start
+# npm
+npm start
+# pnpm
+pnpm start
+```
+
 ## Commands
 
 > The bot works with command modules that can be enabled and disabled. To manage them, consult modules menu via the command `/modules`.
