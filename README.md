@@ -18,6 +18,12 @@ npm install
 pnpm install
 ```
 
+Rename the `.env.example` file to `.env` in the root directory and update the values:
+
+```env
+DISCORD_CLIENT_TOKEN=your_discord_bot_token
+```
+
 ## Commands
 
 > The bot works with command modules that can be enabled and disabled. To manage them, consult modules menu via the command `/modules`.
