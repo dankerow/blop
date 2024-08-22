@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      common-tags:
+        specifier: ^1.8.2
+        version: 1.8.2
       consola:
         specifier: ^3.2.3
         version: 3.2.3
@@ -24,6 +27,9 @@ importers:
       '@stylistic/eslint-plugin-ts':
         specifier: ^2.6.2
         version: 2.6.2(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@types/common-tags':
+        specifier: ^1.8.4
+        version: 1.8.4
       '@types/node':
         specifier: ^20.14.15
         version: 20.14.15
@@ -293,6 +299,9 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
+  '@types/common-tags@1.8.4':
+    resolution: {integrity: sha512-S+1hLDJPjWNDhcGxsxEbepzaxWqURP/o+3cP4aa2w7yBXgdcmKGQtZzP8JbyfOd0m+33nh+8+kvxYE2UJtBDkg==}
+
   '@types/eslint@9.6.0':
     resolution: {integrity: sha512-gi6WQJ7cHRgZxtkQEoyHMppPjq9Kxo5Tjn2prSKDSmZrCz8TZ3jSRCeTJm+WoM+oB0WG37bRqLzaaU3q7JypGg==}
 
@@ -516,6 +525,10 @@ packages:
 
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+
+  common-tags@1.8.2:
+    resolution: {integrity: sha512-gk/Z852D2Wtb//0I+kRFNKKE9dIIVirjoqPoA1wJU+XePVXZfGeBpk45+A1rKO4Q43prqWBNY/MiIeRLbPWUaA==}
+    engines: {node: '>=4.0.0'}
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -1539,6 +1552,8 @@ snapshots:
       - supports-color
       - typescript
 
+  '@types/common-tags@1.8.4': {}
+
   '@types/eslint@9.6.0':
     dependencies:
       '@types/estree': 1.0.5
@@ -1824,6 +1839,8 @@ snapshots:
       color-name: 1.1.4
 
   color-name@1.1.4: {}
+
+  common-tags@1.8.2: {}
 
   concat-map@0.0.1: {}
 
