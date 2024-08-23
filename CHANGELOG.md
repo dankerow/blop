@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.2.2
+
+[compare changes](https://github.com/dankerow/blop/compare/v0.2.1...v0.2.2)
+
+### 🚀 Enhancements
+
+- **utils:** Add generateImage function to fetch images from the RawGO API ([e01b9d3](https://github.com/dankerow/blop/commit/e01b9d3))
+- **utils:** Add handleFetchError to notify maintainers about fetch failures ([6d2d3b4](https://github.com/dankerow/blop/commit/6d2d3b4))
+- **commands:** Add images commands using the RawGO API ([4e259f1](https://github.com/dankerow/blop/commit/4e259f1))
+- **config:** Add the fetch log channel id to defaults ([bc301c6](https://github.com/dankerow/blop/commit/bc301c6))
+- Add the fetch log channel id to config example file ([69230c9](https://github.com/dankerow/blop/commit/69230c9))
+
+### 📖 Documentation
+
+- Add instructions for configuring the image generation commands ([444a948](https://github.com/dankerow/blop/commit/444a948))
+
+### 🏡 Chore
+
+- **config:** Add API list to project configuration ([eb44b3e](https://github.com/dankerow/blop/commit/eb44b3e))
+- **types:** Add a new property for the fetch log channel ID to the Config interface ([139ab75](https://github.com/dankerow/blop/commit/139ab75))
+
+### ❤️ Contributors
+
+- Dan <danker.twist@gmail.com>
+
 ## v0.2.1
 
 [compare changes](https://github.com/dankerow/blop/compare/v0.2.0...v0.2.1)
