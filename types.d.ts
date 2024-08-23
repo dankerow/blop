@@ -19,6 +19,9 @@ export interface Config {
   }
   maintainers?: Snowflake[]
   apis?: APIList
+  fetch?: {
+    logChannelId?: Snowflake
+  }
 }
 
 export interface CommandOptions {
