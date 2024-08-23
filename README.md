@@ -42,3 +42,8 @@ pnpm start
 *   To get more details about how to use commands, do `/help <command>`.
 *   `<>` means required command parameter.
 *   `[]` means optional command parameter.
+
+> **Note**: The image generation commands require the [RawGO API](https://github.com/dankerow/rawgo-api) to be deployed.
+> 
+> Clone the repository and follow the instructions in the [README](https://github.com/dankerow/rawgo-api/blob/main/README.md) to set it up.
+> Once the API is running, update the field `apis.rawgo.baseUrl` in the `config` file with the API URL.
