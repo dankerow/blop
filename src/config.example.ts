@@ -1,5 +1,10 @@
 import type { Config } from '@/types'
 
 export default {
-  maintainers: []
+  maintainers: [],
+  apis: {
+    rawgo: {
+      baseUrl: ''
+    }
+  }
 } satisfies Config
