@@ -52,7 +52,10 @@ export async function loadConfig(
         commands: 'src/commands',
         events: 'src/events'
       },
-      maintainers: []
+      maintainers: [],
+      fetch: {
+        logChannelId: ''
+      }
     }
   })
 
