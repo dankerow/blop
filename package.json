@@ -17,21 +17,21 @@
     "common-tags": "^1.8.2",
     "consola": "^3.2.3",
     "dayjs": "^1.11.13",
-    "discord.js": "^14.16.2",
-    "ofetch": "^1.4.0"
+    "discord.js": "^14.16.3",
+    "ofetch": "^1.4.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
-    "@stylistic/eslint-plugin-ts": "^2.8.0",
+    "@eslint/js": "^9.13.0",
+    "@stylistic/eslint-plugin-ts": "^2.9.0",
     "@types/common-tags": "^1.8.4",
-    "@types/node": "^20.16.10",
+    "@types/node": "^20.16.13",
     "c12": "^1.11.2",
     "dotenv": "^16.4.5",
-    "eslint": "^9.11.1",
-    "eslint-plugin-import": "^2.30.0",
+    "eslint": "^9.13.0",
+    "eslint-plugin-import": "^2.31.0",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2",
-    "typescript-eslint": "^8.7.0"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.10.0"
   },
-  "packageManager": "pnpm@9.11.0"
+  "packageManager": "pnpm@9.12.2"
 }
