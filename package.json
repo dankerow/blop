@@ -24,14 +24,14 @@
     "@eslint/js": "^9.13.0",
     "@stylistic/eslint-plugin-ts": "^2.9.0",
     "@types/common-tags": "^1.8.4",
-    "@types/node": "^20.16.13",
+    "@types/node": "^20.17.0",
     "c12": "^2.0.1",
     "dotenv": "^16.4.5",
     "eslint": "^9.13.0",
     "eslint-plugin-import": "^2.31.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.10.0"
+    "typescript-eslint": "^8.11.0"
   },
   "packageManager": "pnpm@9.12.2"
 }
