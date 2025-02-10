@@ -35,7 +35,7 @@ export class Blop extends Client<true> {
       intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildModeration,
-        GatewayIntentBits.GuildEmojisAndStickers,
+        GatewayIntentBits.GuildExpressions,
         GatewayIntentBits.GuildInvites,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
