@@ -6,6 +6,11 @@ const RESOLVED_CONFIG_SYMBOL = Symbol('config')
 
 export type ResolvedConfig = { [P in keyof Config]-?: Config[P] } & {
   [RESOLVED_CONFIG_SYMBOL]: true
+  dirs: {
+    commands: string
+    events: string
+    tasks: string
+  }
 }
 
 /**
