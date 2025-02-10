@@ -28,8 +28,8 @@ importers:
         specifier: ^9.20.0
         version: 9.20.0
       '@stylistic/eslint-plugin-ts':
-        specifier: ^2.13.0
-        version: 2.13.0(eslint@9.20.0(jiti@2.3.3))(typescript@5.7.3)
+        specifier: ^3.1.0
+        version: 3.1.0(eslint@9.20.0(jiti@2.3.3))(typescript@5.7.3)
       '@types/common-tags':
         specifier: ^1.8.4
         version: 1.8.4
@@ -321,8 +321,8 @@ packages:
     resolution: {integrity: sha512-jjmJywLAFoWeBi1W7994zZyiNWPIiqRRNAmSERxyg93xRGzNYvGjlZ0gR6x0F4gPRi2+0O6S71kOZYyr3cxaIQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@stylistic/eslint-plugin-ts@2.13.0':
-    resolution: {integrity: sha512-nooe1oTwz60T4wQhZ+5u0/GAu3ygkKF9vPPZeRn/meG71ntQ0EZXVOKEonluAYl/+CV2T+nN0dknHa4evAW13Q==}
+  '@stylistic/eslint-plugin-ts@3.1.0':
+    resolution: {integrity: sha512-ExsbaLmPTt3Y9bWN64nw+hpsnLAScLH25ncPxrV16FG2Lvg5wn6aRfMqldUGpu+YdqVmFFU1zehgFh6RIHT6YA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.40.0'
@@ -1544,7 +1544,7 @@ snapshots:
 
   '@sapphire/snowflake@3.5.3': {}
 
-  '@stylistic/eslint-plugin-ts@2.13.0(eslint@9.20.0(jiti@2.3.3))(typescript@5.7.3)':
+  '@stylistic/eslint-plugin-ts@3.1.0(eslint@9.20.0(jiti@2.3.3))(typescript@5.7.3)':
     dependencies:
       '@typescript-eslint/utils': 8.23.0(eslint@9.20.0(jiti@2.3.3))(typescript@5.7.3)
       eslint: 9.20.0(jiti@2.3.3)
