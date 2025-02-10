@@ -22,9 +22,17 @@ Rename the `.env.example` file to `.env` in the root directory and update the va
 
 ```env
 DISCORD_CLIENT_TOKEN=your_discord_bot_token
+
+DATABASE_URL=your_database_url # e.g. postgres://user:password@localhost:5432/database
 ```
 
 ### Database
+
+Set up a [PostgreSQL](https://www.postgresql.org/) database and update the `DATABASE_URL` in the `.env` file.
+
+```env
+DATABASE_URL=your_database_url # e.g. postgres://user:password@localhost:5432/database
+```
 
 The bot uses [Prisma](https://www.prisma.io/) to interact with the database. To set up the database, run the following command:
 
