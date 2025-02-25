@@ -10,6 +10,7 @@ import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { Client, GatewayIntentBits, Options, Partials, REST, Routes } from 'discord.js'
 import { consola } from 'consola'
+import { PrismaClient } from '@prisma/client'
 
 const config = await loadConfig('.', _config)
 
@@ -22,6 +23,7 @@ export class Blop extends Client<true> {
   public logger: ConsolaInstance
   public config: ResolvedConfig
   public commands: Command[]
+  public database: PrismaClient
   private readonly events: { [K in keyof ClientEvents]: (...args: any[]) => void }
   constructor() {
     super({
@@ -51,6 +53,7 @@ export class Blop extends Client<true> {
 
     this.commands = []
     this.events = {} as { [K in keyof ClientEvents]: (...args: any[]) => void }
+    this.database = new PrismaClient()
 
     this.start()
   }
