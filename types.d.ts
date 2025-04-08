@@ -48,6 +48,10 @@ export interface CommandOptions {
 export interface CommandContext {
   client: Blop
   interaction: ChatInputCommandInteraction<'cached'>
+  data: {
+    user: User
+    guild: Guild
+  }
 }
 
 export interface PartialCommandContext {
