@@ -86,4 +86,11 @@ export type PartialCommandContext = Omit<CommandContext, 'interaction' | 'data'>
   interaction?: ChatInputCommandInteraction<'cached'>
 }
 
+export type TranslateContext = Omit<CommandContext, 'interaction' | 'data'> & {
+  data?: {
+    user?: User
+    guild?: Guild
+  }
+}
+
 export type CommandOutput = string | MessagePayload | InteractionReplyOptions | null | undefined | void | Promise<string | MessagePayload | InteractionReplyOptions | null | undefined | void>
