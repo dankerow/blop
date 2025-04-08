@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id       String @id @unique
-  language String
+  language String @default("en")
 }
 
 model Guild {
