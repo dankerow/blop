@@ -135,19 +135,34 @@ export class Blop extends Client<true> {
    */
   async registerCommands(): Promise<void> {
     const rest = new REST().setToken(process.env.DISCORD_CLIENT_TOKEN ?? '')
-    const commands = this.commands.map((command) => command.applicationCommandBody)
-
+    
     try {
-      this.logger.info(`Started refreshing ${this.commands.length} application (/) commands.`)
+      const guilds = await this.database.guild.findMany()
+      
+      this.logger.info(`Started refreshing application (/) commands for ${guilds.length} guilds.`)
 
-      const data = await rest.put(
-        Routes.applicationCommands(this.user.id),
-        { body: commands }
-      ) as APIApplicationCommand[]
+      for (const guild of guilds) {
+        try {
+          const filteredCommands = this.commands.filter(command => {
+            const modules = guild.modules || {}
 
-      this.logger.info(`Successfully reloaded ${data.length} application (/) commands.`)
-    } catch (error) {
-      this.logger.error(error)
+            return !modules[command.category] || modules[command.category].enabled
+          })
+          
+          const commandsToRegister = filteredCommands.map(cmd => cmd.applicationCommandBody)
+
+          const data = await rest.put(
+            Routes.applicationGuildCommands(this.user.id, guild.id),
+            { body: commandsToRegister }
+          ) as APIApplicationCommand[]
+          
+          this.logger.info(`Registered ${data.length} commands for guild ${guild.id}`)
+        } catch (error: unknown) {
+          this.logger.error(`Failed to register commands for guild ${guild.id}: ${error instanceof Error ? error.message : String(error)}`)
+        }
+      }
+    } catch (error: unknown) {
+      this.logger.error(`Command registration process failed: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
 
