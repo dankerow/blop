@@ -116,7 +116,7 @@ export default class InteractionCreate extends Event {
 
     try {
       return interaction.reply(`'You are in the cooldown zone, please wait another ${seconds > 1 ? `${seconds} seconds` : 'another second' }.`)
-    } catch (e) {
+    } catch {
       return interaction.reply('\uD83D\uDEA7 An error occurred. Try again later.')
     }
   }
