@@ -20,7 +20,7 @@ export default class Help extends Command {
     })
   }
 
-  execute({ client, interaction }: CommandContext) {
+  execute({ client, interaction, data }: CommandContext) {
     const commandArg = interaction.options.getString('command')
     if (commandArg) {
       const command = client.commands.find((module) => module.name === commandArg.toLowerCase())
@@ -66,10 +66,12 @@ export default class Help extends Command {
       const commands = client.commands.filter((module) => module.category === category)
       if (commands.length < 1) return
 
-      embed.fields!.push({
-        name: category,
-        value: `\`${commands.map((command) => command.name).join('`, `')}\``
-      })
+      if (data.guild.modules[category.toLowerCase()] && data.guild.modules[category.toLowerCase()].enabled) {
+        embed.fields!.push({
+          name: category,
+          value: `\`${commands.map((command) => command.name).join('`, `')}\``
+        })
+      }
     })
 
     return { embeds: [embed] }
