@@ -57,6 +57,14 @@ export async function loadConfig(
         commands: 'src/commands',
         events: 'src/events'
       },
+      i18n: {
+        languages: [],
+        options: {
+          backend: {
+            loadPath: 'locales/{{lng}}.json'
+          }
+        }
+      },
       maintainers: [],
       fetch: {
         logChannelId: ''
