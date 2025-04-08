@@ -19,5 +19,5 @@ model User {
 model Guild {
   id      String @id @unique
   /// [GuildModules]
-  modules Json
+  modules Json @default("{\"administration\": { \"editable\": false, \"enabled\": true }, \"general\": { \"editable\": false, \"enabled\": true }, \"images\": { \"editable\": true, \"enabled\": true }, \"miscellaneous\": { \"editable\": true, \"enabled\": true } }")
 }
