@@ -26,6 +26,9 @@ importers:
       i18next:
         specifier: ^24.2.3
         version: 24.2.3(typescript@5.8.3)
+      i18next-fs-backend:
+        specifier: ^2.6.0
+        version: 2.6.0
       ofetch:
         specifier: ^1.4.1
         version: 1.4.1
@@ -1012,6 +1015,9 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
+
+  i18next-fs-backend@2.6.0:
+    resolution: {integrity: sha512-3ZlhNoF9yxnM8pa8bWp5120/Ob6t4lVl1l/tbLmkml/ei3ud8IWySCHt2lrY5xWRlSU5D9IV2sm5bEbGuTqwTw==}
 
   i18next@24.2.3:
     resolution: {integrity: sha512-lfbf80OzkocvX7nmZtu7nSTNbrTYR52sLWxPtlXX1zAhVw8WEnFk4puUkCR4B1dNQwbSpEHHHemcZu//7EcB7A==}
@@ -2523,6 +2529,8 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  i18next-fs-backend@2.6.0: {}
 
   i18next@24.2.3(typescript@5.8.3):
     dependencies:
