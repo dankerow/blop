@@ -38,6 +38,27 @@ export default class InteractionCreate extends Event {
     if (!interaction.isCommand()) return
 
     try {
+      const data = {
+        user: await client.database.user.upsert({
+          where: {
+            id: interaction.user.id
+          },
+          create: {
+            id: interaction.user.id
+          },
+          update: {}
+        }),
+        guild: await client.database.guild.upsert({
+          where: {
+            id: interaction.guild.id
+          },
+          create: {
+            id: interaction.guild.id
+          },
+          update: {}
+        })
+      }
+
       const command = client.commands.filter((module) => module.name === interaction.commandName)[0]
 
       if (!command) return
@@ -56,7 +77,7 @@ export default class InteractionCreate extends Event {
       this.cooldowns.set(interaction.user.id, Date.now() + (command.cooldown ? command.cooldown : 2000))
 
       try {
-        this.output = await command.execute({ client, interaction })
+        this.output = await command.execute({ client, interaction, data })
       } catch (error: any) {
         client.logger.error(error instanceof Error ? error.stack : error)
         return interaction.reply('\uD83D\uDEA7 An error occurred. Try again later.')
