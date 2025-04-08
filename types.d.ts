@@ -67,7 +67,7 @@ export interface CommandOptions {
   _filename: string
   name: string
   category?: string
-  description: (context: CommandContext | PartialCommandContext) => string
+  description?: (context: CommandContext | PartialCommandContext | TranslateContext) => string
   options?: APIApplicationCommandOption[]
   disabled?: boolean
   cooldown?: number
