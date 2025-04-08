@@ -5,6 +5,7 @@ import type {
   ChatInputCommandInteraction,
   Snowflake
 } from 'discord.js'
+import type { Prisma } from '@prisma/client'
 
 interface APIItem {
   baseUrl: string
@@ -23,6 +24,16 @@ export interface Config {
     logChannelId?: Snowflake
   }
 }
+
+export type User = Prisma.UserGetPayload<{
+  id: true
+  language: true
+}>
+
+export type Guild = Prisma.GuildGetPayload<{
+  id: true
+  modules: true
+}>
 
 export interface CommandOptions {
   _filename: string
