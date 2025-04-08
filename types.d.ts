@@ -35,6 +35,21 @@ export type Guild = Prisma.GuildGetPayload<{
   modules: true
 }>
 
+interface ModuleConfig {
+  editable: boolean
+  enabled: boolean
+}
+
+export interface ModuleOptions {
+  [key: string]: ModuleConfig
+}
+
+declare global {
+  namespace PrismaJson {
+    type GuildModules = ModuleOptions
+  }
+}
+
 export interface CommandOptions {
   _filename: string
   name: string
