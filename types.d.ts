@@ -82,8 +82,7 @@ export interface CommandContext {
   }
 }
 
-export interface PartialCommandContext {
-  client: Blop
+export type PartialCommandContext = Omit<CommandContext, 'interaction' | 'data'> & {
   interaction?: ChatInputCommandInteraction<'cached'>
 }
 
