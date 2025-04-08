@@ -45,6 +45,7 @@ export type User = Prisma.UserGetPayload<{
 export type Guild = Prisma.GuildGetPayload<{
   id: true
   modules: true
+  language: true
 }>
 
 interface ModuleConfig {
