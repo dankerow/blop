@@ -7,6 +7,13 @@ import type {
   Snowflake
 } from 'discord.js'
 import type { Prisma } from '@prisma/client'
+import type { InitOptions } from 'i18next'
+
+interface Language {
+  iso: string
+  localeName: string
+  aliases: string[]
+}
 
 interface APIItem {
   baseUrl: string
@@ -20,6 +27,10 @@ export interface Config {
     events?: string
   }
   maintainers?: Snowflake[]
+  i18n?: {
+    languages: Language[]
+    options: InitOptions
+  }
   apis?: APIList
   fetch?: {
     logChannelId?: Snowflake
