@@ -27,7 +27,7 @@
     "@stylistic/eslint-plugin-ts": "^4.2.0",
     "@types/common-tags": "^1.8.4",
     "@types/node": "^22.14.0",
-    "c12": "^2.0.4",
+    "c12": "^3.0.3",
     "dotenv": "^16.4.7",
     "eslint": "^9.24.0",
     "eslint-plugin-import": "^2.31.0",
