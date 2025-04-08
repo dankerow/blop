@@ -1,8 +1,9 @@
 import type { Blop } from '@/structures'
 import type {
   APIApplicationCommandOption,
-  APIEmbed,
   ChatInputCommandInteraction,
+  InteractionReplyOptions,
+  MessagePayload,
   Snowflake
 } from 'discord.js'
 import type { Prisma } from '@prisma/client'
@@ -74,4 +75,4 @@ export interface PartialCommandContext {
   interaction?: ChatInputCommandInteraction<'cached'>
 }
 
-export type CommandOutput = string | { content?: string; embeds?: APIEmbed[]; files?: any[]; components?: any[] } | null | undefined | void | Promise<string | { content?: string; embeds?: APIEmbed[]; files?: any[]; components?: any[] } | null | undefined | void>
+export type CommandOutput = string | MessagePayload | InteractionReplyOptions | null | undefined | void | Promise<string | MessagePayload | InteractionReplyOptions | null | undefined | void>
