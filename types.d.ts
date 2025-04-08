@@ -5,6 +5,7 @@ import type {
   ChatInputCommandInteraction,
   Snowflake
 } from 'discord.js'
+import type { Prisma } from '@prisma/client'
 
 interface APIItem {
   baseUrl: string
@@ -24,6 +25,31 @@ export interface Config {
   }
 }
 
+export type User = Prisma.UserGetPayload<{
+  id: true
+  language: true
+}>
+
+export type Guild = Prisma.GuildGetPayload<{
+  id: true
+  modules: true
+}>
+
+interface ModuleConfig {
+  editable: boolean
+  enabled: boolean
+}
+
+export interface ModuleOptions {
+  [key: string]: ModuleConfig
+}
+
+declare global {
+  namespace PrismaJson {
+    type GuildModules = ModuleOptions
+  }
+}
+
 export interface CommandOptions {
   _filename: string
   name: string
@@ -37,6 +63,10 @@ export interface CommandOptions {
 export interface CommandContext {
   client: Blop
   interaction: ChatInputCommandInteraction<'cached'>
+  data: {
+    user: User
+    guild: Guild
+  }
 }
 
 export interface PartialCommandContext {

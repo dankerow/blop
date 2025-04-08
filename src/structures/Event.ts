@@ -1,4 +1,4 @@
-import type { InteractionResponse, Message } from 'discord.js';
+import type { InteractionResponse, Message } from 'discord.js'
 
 /**
  * @class Event
