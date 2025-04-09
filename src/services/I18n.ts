@@ -71,7 +71,7 @@ export class I18n {
    * @param {PartialCommandContext} ctx - The context object.
    * @param {string} key - The key to translate.
    * @param {Object} [options={}] - Additional translation options.
-   * @param {string} [options.lng] - The language to use for translation. Defaults to 'en'.
+   * @param {string} [options.lng] - The language to use for translation. Defaults to 'en-US'.
    * @returns {string} - The translated string.
    */
   translate(ctx: PartialCommandContext, key: string, options: TOptions = {}): string {
