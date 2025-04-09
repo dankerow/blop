@@ -1,4 +1,4 @@
-import type { CommandContext, CommandOptions, PartialCommandContext, CommandOutput } from '@/types'
+import type { CommandContext, CommandOptions, PartialCommandContext, TranslateContext, CommandOutput } from '@/types'
 import type { Blop } from '@/structures'
 import type { APIApplicationCommandOption } from 'discord.js'
 
@@ -30,7 +30,7 @@ export class Command {
   /**
    * The description of the command.
    */
-  public description: (context: CommandContext | PartialCommandContext) => string
+  public description: (context: CommandContext | PartialCommandContext | TranslateContext) => string
 
   /**
    * Indicates whether the command is disabled.
@@ -66,11 +66,33 @@ export class Command {
     this._filename = options._filename
     this.name = options.name
     this.category = options.category || 'miscellaneous'
-    this.description = options.description
+
+    if (options.description) {
+      this.description = options.description
+    } else {
+      const translationKey = `${this.name}.description`
+      this.description = (context) => {
+        if (client.i18n.exists(translationKey)) {
+          return client.i18n.translate(context, translationKey)
+        } else {
+          return 'No description provided.'
+        }
+      }
+    }
+
+    let appCommandDescription = 'No description provided.'
+    if (options.description) {
+      appCommandDescription = options.description({ client })
+    } else {
+      const translationKey = `${this.name}.description`
+      if (client.i18n.exists(translationKey)) {
+        appCommandDescription = client.i18n.translate({ client }, translationKey)
+      }
+    }
 
     this.applicationCommandBody = {
       name: options.name,
-      description: options.description({ client }),
+      description: appCommandDescription,
       options: options.options ?? [],
       dm_permission: false
     }
