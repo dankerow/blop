@@ -59,6 +59,10 @@ export default class InteractionCreate extends Event {
         })
       }
 
+      interaction.translate = (key: string, options) => {
+        return client.i18n.translate({ client, data }, key, options)
+      }
+
       const command = client.commands.filter((module) => module.name === interaction.commandName)[0]
 
       if (!command) return
