@@ -1,5 +1,5 @@
 import type { Blop } from '@/structures'
-import type { TranslateContext } from '@/types'
+import type { PartialCommandContext } from '@/types'
 import type { i18n, InitOptions, TFunction, TOptions } from 'i18next'
 
 import { createInstance, reloadResources } from 'i18next'
@@ -68,18 +68,19 @@ export class I18n {
   /**
    * Translates a given key using the i18n method of the client.
    *
-   * @param {Object} ctx - The context object.
+   * @param {PartialCommandContext} ctx - The context object.
    * @param {string} key - The key to translate.
    * @param {Object} [options={}] - Additional translation options.
    * @param {string} [options.lng] - The language to use for translation. Defaults to 'en'.
    * @returns {string} - The translated string.
    */
-  translate(ctx: TranslateContext, key: string, options: TOptions = {}): string {
-    const data = {
-      user: ctx.data ? ctx.data.user : null,
-      guild: ctx.data ? ctx.data.guild : null
+  translate(ctx: PartialCommandContext, key: string, options: TOptions = {}): string {
+    const availableLanguages = this.client.config.i18n.languages.map((lang) => lang.iso)
+
+    if (ctx.interaction?.locale && availableLanguages.includes(ctx.interaction?.locale)) {
+      options.lng = ctx.interaction.locale
     }
 
-    return this.t(key, { lng: data.guild ? data.guild.language : 'en', ...options })
+    return this.t(key, options)
   }
 }
