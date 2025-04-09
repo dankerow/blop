@@ -67,7 +67,7 @@ export interface CommandOptions {
   _filename: string
   name: string
   category?: string
-  description?: (context: CommandContext | PartialCommandContext | TranslateContext) => string
+  description?: (context: CommandContext | PartialCommandContext) => string
   options?: APIApplicationCommandOption[]
   disabled?: boolean
   cooldown?: number
@@ -84,12 +84,9 @@ export interface CommandContext {
 
 export type PartialCommandContext = Omit<CommandContext, 'interaction' | 'data'> & {
   interaction?: ChatInputCommandInteraction<'cached'>
-}
-
-export type TranslateContext = Omit<CommandContext, 'interaction' | 'data'> & {
   data?: {
-    user?: User
-    guild?: Guild
+    user: User
+    guild: Guild
   }
 }
 

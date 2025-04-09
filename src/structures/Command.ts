@@ -1,4 +1,4 @@
-import type { CommandContext, CommandOptions, PartialCommandContext, TranslateContext, CommandOutput } from '@/types'
+import type { CommandContext, CommandOptions, PartialCommandContext, CommandOutput } from '@/types'
 import type { Blop } from '@/structures'
 import type { APIApplicationCommandOption } from 'discord.js'
 
@@ -30,7 +30,7 @@ export class Command {
   /**
    * The description of the command.
    */
-  public description: (context: CommandContext | PartialCommandContext | TranslateContext) => string
+  public description: (context: CommandContext | PartialCommandContext) => string
 
   /**
    * Indicates whether the command is disabled.
