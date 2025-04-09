@@ -7,7 +7,7 @@ import type {
   Snowflake
 } from 'discord.js'
 import type { Prisma } from '@prisma/client'
-import type { InitOptions } from 'i18next'
+import type { InitOptions, TOptions } from 'i18next'
 
 interface Language {
   iso: string
@@ -94,3 +94,9 @@ export type TranslateContext = Omit<CommandContext, 'interaction' | 'data'> & {
 }
 
 export type CommandOutput = string | MessagePayload | InteractionReplyOptions | null | undefined | void | Promise<string | MessagePayload | InteractionReplyOptions | null | undefined | void>
+
+declare module 'discord.js' {
+  interface BaseInteraction {
+    translate(key: string, options: TOptions = {}): string
+  }
+}
