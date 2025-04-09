@@ -1,16 +1,18 @@
-import type { CommandContext } from '@/types'
+import type { PartialCommandContext } from '@/types'
 import type { TextChannel } from 'discord.js'
 import type { FetchContext, FetchResponse } from 'ofetch'
-import type { R } from 'ofetch/dist/shared/ofetch.8459ad38'
+import type { R } from 'ofetch/dist/shared/ofetch.d0b3d489'
 
 /**
  * Handles fetching errors and sends an error message to a specified Discord channel.
  *
- * @param {Object} ctx - The context object that contains the client and message information.
+ * @param {PartialCommandContext} ctx - The context object that contains the client and message information.
  * @param { FetchContext & { error: Error } | FetchContext & { response: FetchResponse<R> }} fetchContext
  * @returns {Promise} - A Promise that resolves when the error message is sent to the Discord channel.
  */
-export default async (ctx: CommandContext, fetchContext: FetchContext & { error: Error } | FetchContext & { response: FetchResponse<R> }): Promise<void> => {
+export default async (ctx: PartialCommandContext, fetchContext: FetchContext & { error: Error } | FetchContext & { response: FetchResponse<R> }): Promise<void> => {
+  if (!ctx.interaction) return
+
   const logChannelId = ctx.client.config.fetch.logChannelId!
   const logChannel = ctx.client.channels.cache.get(logChannelId) as TextChannel
 
