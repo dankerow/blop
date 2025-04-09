@@ -72,7 +72,7 @@ export class Command {
     if (options.description) {
       this.description = options.description
     } else {
-      const translationKey = `${this.name}.description`
+      const translationKey = `commands.${this.name}.description`
       this.description = (context) => {
         if (client.i18n.exists(translationKey)) {
           return client.i18n.translate(context, translationKey)
@@ -86,7 +86,7 @@ export class Command {
     if (options.description) {
       appCommandDescription = options.description({ client })
     } else {
-      const translationKey = `${this.name}.description`
+      const translationKey = `commands.${this.name}.description`
       if (client.i18n.exists(translationKey)) {
         appCommandDescription = client.i18n.translate({ client }, translationKey)
       }
@@ -99,13 +99,13 @@ export class Command {
 
     for (const lang of availableLanguages) {
       if (lang !== 'en-US') {
-        const nameKey = `${this.name}.name`
+        const nameKey = `commands.${this.name}.name`
         if (client.i18n.exists(nameKey)) {
           nameLocalizations[lang] = client.i18n.translate({ client }, nameKey, { lng: lang })
         }
       }
 
-      const descKey = `${this.name}.description`
+      const descKey = `commands.${this.name}.description`
       if (client.i18n.exists(descKey)) {
         descriptionLocalizations[lang] = client.i18n.translate({ client }, descKey, { lng: lang })
       }

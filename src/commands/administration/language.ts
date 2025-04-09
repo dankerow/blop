@@ -29,7 +29,7 @@ export default class Language extends Command {
     if (!languageArg) {
       const currentLanguage = client.config.i18n.languages.find((lang) => lang.iso === data.guild.language)?.localeName
 
-      return interaction.translate('language.current-language', {
+      return interaction.translate('commands.language.current-language', {
         language: currentLanguage
       })
     }
@@ -39,11 +39,11 @@ export default class Language extends Command {
     if (!language) {
       const availableLanguages = client.config.i18n.languages.map((lang) => lang.localeName).join('`, `')
 
-      return `${interaction.translate('language.unknown-language')} ${interaction.translate('language.available-languages', { languages: availableLanguages })}`
+      return `${interaction.translate('commands.language.unknown-language')} ${interaction.translate('commands.language.available-languages', { languages: availableLanguages })}`
     }
 
     if (language.iso === data.guild.language) {
-      return interaction.translate('language.already-set', {
+      return interaction.translate('commands.language.already-set', {
         language: language.localeName
       })
     }
@@ -57,7 +57,7 @@ export default class Language extends Command {
       }
     })
 
-    return interaction.translate('language.language-changed', {
+    return interaction.translate('commands.language.language-changed', {
       language: language.localeName
     })
   }
