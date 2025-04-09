@@ -52,6 +52,8 @@ export class Command {
   public applicationCommandBody: {
     name: string
     description: string
+    name_localizations?: Record<string, string>
+    description_localizations?: Record<string, string>
     options: APIApplicationCommandOption[]
     dm_permission: boolean
   }
@@ -90,9 +92,30 @@ export class Command {
       }
     }
 
+    const nameLocalizations: Record<string, string> = {}
+    const descriptionLocalizations: Record<string, string> = {}
+
+    const availableLanguages = client.config.i18n.languages.map(lang => lang.iso)
+
+    for (const lang of availableLanguages) {
+      if (lang !== 'en-US') {
+        const nameKey = `${this.name}.name`
+        if (client.i18n.exists(nameKey)) {
+          nameLocalizations[lang] = client.i18n.translate({ client }, nameKey, { lng: lang })
+        }
+      }
+
+      const descKey = `${this.name}.description`
+      if (client.i18n.exists(descKey)) {
+        descriptionLocalizations[lang] = client.i18n.translate({ client }, descKey, { lng: lang })
+      }
+    }
+
     this.applicationCommandBody = {
       name: options.name,
       description: appCommandDescription,
+      name_localizations: Object.keys(nameLocalizations).length > 0 ? nameLocalizations : undefined,
+      description_localizations: Object.keys(descriptionLocalizations).length > 0 ? descriptionLocalizations : undefined,
       options: options.options ?? [],
       dm_permission: false
     }
