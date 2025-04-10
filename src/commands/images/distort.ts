@@ -3,19 +3,19 @@ import type { Blop } from '@/structures'
 
 import { Command } from '@/structures'
 import generateImage from '@/utils/generateImage'
+import { ApplicationCommandOptionType } from 'discord.js'
 
 export default class Distort extends Command {
   constructor(client: Blop) {
     super(client, {
       _filename: import.meta.url,
       name: 'distort',
-      description: () => 'Applies a distortion effect to your avatar.',
       cooldown: 5000,
       options: [
         {
           name: 'user',
           description: 'An user to get the avatar from',
-          type: 6
+          type: ApplicationCommandOptionType.User
         }
       ]
     })
@@ -39,7 +39,7 @@ export default class Distort extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return 'The image is above 8MB, I can\'t display that.'
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('images.too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }

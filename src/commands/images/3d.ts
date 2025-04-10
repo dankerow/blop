@@ -10,7 +10,6 @@ export default class ThreeD extends Command {
     super(client, {
       _filename: import.meta.url,
       name: '3d',
-      description: () => 'Applies a 3D effect to your avatar.',
       cooldown: 5000,
       options: [
         {
@@ -40,7 +39,7 @@ export default class ThreeD extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return 'The image is above 8MB, I can\'t display that.'
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('errors.file-too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }

@@ -13,8 +13,7 @@ export default class Uptime extends Command {
   constructor(client: Blop) {
     super(client, {
       _filename: import.meta.url,
-      name: 'uptime',
-      description: () => 'Gives the uptime of bot its hosting server.'
+      name: 'uptime'
     })
   }
 

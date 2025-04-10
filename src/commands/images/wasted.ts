@@ -10,7 +10,6 @@ export default class Wasted extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'wasted',
-      description: () => 'Generates the "WASTED" meme using your avatar.',
       cooldown: 5000,
       options: [
         {
@@ -40,7 +39,7 @@ export default class Wasted extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return 'The image is above 8MB, I can\'t display that.'
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('images.too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }

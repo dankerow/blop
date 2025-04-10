@@ -11,7 +11,6 @@ export default class About extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'about',
-      description: () => 'Gives information about the bot',
       options: [
         {
           name: 'shards',
@@ -65,10 +64,13 @@ export default class About extends Command {
     }
 
     const shardStats = client.shard ? (await client.shard.broadcastEval(client => client.shard!.count)).reduce((sum, val) => sum + val, 0) : 0
-    const uptime = client.shard ? (await client.shard.broadcastEval(client => client.uptime)).reduce((max, cur) => Math.max(max, cur), -Infinity) : client.uptime
 
     if (interaction.options.getBoolean('shards')) {
-      if (!client.shard) return 'No shards are online.'
+      if (!client.shard) {
+        return interaction.translate('about.no-shards', {
+          format: 'capital'
+        })
+      }
 
       const shards = await client.shard.broadcastEval(client => [
         client.shard!.ids[0],
@@ -101,30 +103,34 @@ export default class About extends Command {
             name: client.user.username,
             icon_url: client.user.displayAvatarURL()
           },
-          description: `${client.user.username} is a open-source Discord bot that is designed to help you with your server. It has a lot of features that can help you with moderation, fun, and utility. It is developed by ${maintainers}.`,
+          description: interaction.translate('commands.about.embed.description', {
+            clientUsername: client.user.username,
+            maintainers,
+            version,
+            discordJsVersion: dependencies['discord.js'],
+            nodeVersion: process.version,
+            format: 'capital'
+          }),
           fields: [
             {
-              name: '\\\uD83E\uDD16 Bot',
-              value: `**\`Developers\`**: ${maintainers}\n**\`Guilds\`**: serving \`${guilds}\` guilds. | **\`Users\`**: \`${users}\` cached users.\n**\`Channels\`**: monitoring \`${Math.round(textChannels + voiceChannels)}\` channels.\n**\`Uptime\`**: \`${uptime}\``,
-              inline: false
-            },
-            {
-              name: '\\\uD83D\uDCBF Other',
-              value: `The bot is running on version \`${version}\`, using discord.js library. (version \`${dependencies['discord.js']}\`)\n**\`Node.js\`**: \`${process.version}\``,
-              inline: false
-            },
-            {
-              name: '\\\uD83D\uDCC0 Hosting Server',
+              name: interaction.translate('commands.about.embed.field-0.name'),
               value: `**\`Platform\`**: \`${process.platform} - (${process.arch})\`\n**\`RSS\`**: \`${rss} MB\` - **\`RAM\`**: \`${heapUsed} MB\` / \`${Math.round(os.totalmem() / 1000000000)} GB\``,
               inline: false
             },
             {
-              name: '\\\uD83D\uDCE1 Shards status',
-              value: client.shard ? `${shardStats} / ${client.shard.count} shards are online. For more information do \`/about --shards\`.` : 'No shards are online.',
+              name: interaction.translate('commands.about.embed.field-1.name'),
+              value: client.shard ? 
+                  interaction.translate('commands.about.shards-info', { 
+                    shardStats, 
+                    shardCount: client.shard.count 
+                  }) : 
+                  interaction.translate('commands.about.no-shards', {
+                    format: 'capital'
+                  }),
               inline: false
             },
             {
-              name: '\\❤️ Links',
+              name: interaction.translate('commands.about.embed.field-2.name'),
               value: '[GitHub](https://github.com/dankerow/blop)',
               inline: false
             }

@@ -14,7 +14,6 @@ export default class Guild extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'guild',
-      description: () => 'Displays the current guild information.',
       options: [
         {
           name: 'roles',
@@ -34,7 +33,7 @@ export default class Guild extends Command {
     let explicitContent: string
     switch (interaction.guild.explicitContentFilter) {
       case GuildExplicitContentFilter.Disabled:
-        explicitContent = 'Disabled'
+        explicitContent = interaction.translate('common.disabled')
         break
       case GuildExplicitContentFilter.MembersWithoutRoles:
         explicitContent = 'Members without role'
@@ -43,20 +42,20 @@ export default class Guild extends Command {
         explicitContent = 'All members'
         break
       default:
-        explicitContent = 'Unknown'
+        explicitContent = interaction.translate('keywords.unknown')
         break
     }
 
     let verificationLevel: string
     switch (interaction.guild.verificationLevel) {
       case GuildVerificationLevel.None:
-        verificationLevel = 'None'
+        verificationLevel = interaction.translate('keywords.none')
         break
       case GuildVerificationLevel.Low:
-        verificationLevel = 'Low'
+        verificationLevel = interaction.translate('guild.verification-level.low')
         break
       case GuildVerificationLevel.Medium:
-        verificationLevel = 'Medium'
+        verificationLevel = interaction.translate('guild.verification-level.medium')
         break
       case GuildVerificationLevel.High:
         verificationLevel = '(╯°□°）╯︵ ┻━┻'
@@ -65,7 +64,7 @@ export default class Guild extends Command {
         verificationLevel = '┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻'
         break
       default:
-        verificationLevel = 'Unknown'
+        verificationLevel = interaction.translate('keywords.unknown')
         break
     }
 
@@ -80,10 +79,10 @@ export default class Guild extends Command {
         embeds: [
           {
             author: {
-              name: `${interaction.guild.name} - Roles`,
+              name: `${interaction.guild.name} - ${interaction.translate('keywords.role', { count: roles.length })}`,
               icon_url: interaction.guild.iconURL()
             },
-            description: roles.length ? trimArray(roles, 35).join(', ') : 'None',
+            description: roles.length ? trimArray(roles, 35).join(', ') : interaction.translate('keywords.none'),
             color: 7154431
           }
         ]
@@ -93,10 +92,10 @@ export default class Guild extends Command {
         embeds: [
           {
             author: {
-              name: `${interaction.guild.name} - Emotes`,
+              name: `${interaction.guild.name} - ${interaction.translate('keywords.emoji', { count: emotes.length })}`,
               icon_url: interaction.guild.iconURL()
             },
-            description: emotes.length ? trimArray(emotes, 200).join(' - ') : 'None',
+            description: emotes.length ? trimArray(emotes, 200).join(' - ') : interaction.translate('keywords.none'),
             color: 7154431
           }
         ]
@@ -113,37 +112,61 @@ export default class Guild extends Command {
           thumbnail: { url: interaction.guild.iconURL({ size: 512 }) },
           fields: [
             {
-              name: 'Owner',
+              name: interaction.translate('commands.guild.embed.field-0.name', {
+                format: 'capital'
+              }),
               value: `<@${interaction.guild.ownerId}>`,
               inline: true
             },
             {
-              name: 'Verification level',
+              name: interaction.translate('commands.guild.embed.field-1.name', {
+                format: 'capital'
+              }),
               value: verificationLevel,
               inline: true
             },
             {
-              name: 'Explicit content',
+              name: interaction.translate('commands.guild.embed.field-2.name', {
+                format: 'capital'
+              }),
               value: explicitContent,
               inline: true
             },
             {
-              name: `Channels (${interaction.guild.channels.cache.size})`,
+              name: interaction.translate('commands.guild.embed.field-3.name', {
+                channelCount: interaction.guild.channels.cache.size,
+                format: 'capital'
+              }),
               value:`\`Text channels\` ${interaction.guild.channels.cache.filter((channel) => channel.type === ChannelType.GuildText).size} - \`Voice channels\` ${interaction.guild.channels.cache.filter((channel) => channel.type === ChannelType.GuildVoice).size} \n \`AFK channel\` ${interaction.guild.afkChannel ?? 'None'} | \`Timeout\` ${interaction.guild.afkTimeout}`,
               inline: false
             },
             {
-              name: 'Roles',
-              value: `There are \`${roles.length}\` role(s) on the server, do \`/guild roles\` to see them.`,
+              name: interaction.translate('keywords.role', {
+                count: roles.length,
+                format: 'capital'
+              }),
+              value: interaction.translate('commands.guild.embed.field-4.value', {
+                roleCount: roles.length,
+                format: 'capital'
+              }),
               inline: false
             },
             {
-              name: 'Emotes',
-              value: `There are \`${emotes.length}\` emote(s) on the server, do \`/guild emotes\` to see them.`,
+              name: interaction.translate('keywords.emoji', {
+                count: emotes.length,
+                format: 'capital'
+              }),
+              value: interaction.translate('commands.guild.embed.field-5.value', {
+                emojiCount: emotes.length,
+                format: 'capital'
+              }),
               inline: false
             },
             {
-              name: `Members (${interaction.guild.memberCount})`,
+              name: interaction.translate('commands.guild.embed.field-6.name', {
+                memberCount: interaction.guild.memberCount,
+                format: 'capital'
+              }),
               value: `There are **${interaction.guild.members.cache.filter((member) => !member.user.bot).size}** user(s) and **${interaction.guild.members.cache.filter((member) => member.user.bot).size}** bot(s) on the guild.\nOnline: **${interaction.guild.members.cache.filter((member) => member.presence && member.presence.status === 'online').size}** | Idle: **${interaction.guild.members.cache.filter((member) => member.presence && member.presence.status === 'idle').size}**\nOccupied: **${interaction.guild.members.cache.filter((member) => member.presence && member.presence.status === 'dnd').size}** | Offline: **${interaction.guild.members.cache.filter((member) => member.presence && member.presence.status === 'offline').size}**`,
               inline: false
             }

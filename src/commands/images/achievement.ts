@@ -10,20 +10,20 @@ export default class Achievement extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'achievement',
-      description: () => 'Customize your Minecraft Achievement.',
       cooldown: 5000,
       options: [
         {
           name: 'text',
           description: 'The text to display',
           type: ApplicationCommandOptionType.String,
-          required: true
+          required: true,
+          min_length: 1,
+          max_length: 25
         },
         {
           name: 'color',
           description: 'The color to display',
-          type: ApplicationCommandOptionType.String,
-          required: false
+          type: ApplicationCommandOptionType.String
         }
       ]
     })
@@ -32,8 +32,6 @@ export default class Achievement extends Command {
   async execute({ client,  interaction }: CommandContext) {
     const textArg = interaction.options.getString('text', true)
     const colorArg = interaction.options.getString('color')
-
-    if (textArg.length < 1 || textArg.length > 25) return 'Please insert text upper than 1 characters or fewer than 25 characters.'
 
     const imageBuffer = await generateImage({ client, interaction }, {
       name: this.name,
@@ -44,7 +42,7 @@ export default class Achievement extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return 'The image is above 8MB, I can\'t display that.'
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('errors.file-too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }

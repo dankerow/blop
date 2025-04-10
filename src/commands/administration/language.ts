@@ -30,17 +30,12 @@ export default class Language extends Command {
       const currentLanguage = client.config.i18n.languages.find((lang) => lang.iso === data.guild.language)?.localeName
 
       return interaction.translate('commands.language.current-language', {
-        language: currentLanguage
+        language: currentLanguage,
+        format: 'capital'
       })
     }
 
-    const language = client.config.i18n.languages.find((lang) => lang.aliases.includes(languageArg.toLowerCase()))
-
-    if (!language) {
-      const availableLanguages = client.config.i18n.languages.map((lang) => lang.localeName).join('`, `')
-
-      return `${interaction.translate('commands.language.unknown-language')} ${interaction.translate('commands.language.available-languages', { languages: availableLanguages })}`
-    }
+    const language = client.config.i18n.languages.find((lang) => lang.aliases.includes(languageArg.toLowerCase()))!
 
     if (language.iso === data.guild.language) {
       return interaction.translate('commands.language.already-set', {

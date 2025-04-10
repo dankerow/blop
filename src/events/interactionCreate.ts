@@ -60,7 +60,7 @@ export default class InteractionCreate extends Event {
       }
 
       interaction.translate = (key: string, options) => {
-        return client.i18n.translate({ client, data }, key, options)
+        return client.i18n.translate({ client, interaction }, key, options)
       }
 
       const command = client.commands.filter((module) => module.name === interaction.commandName)[0]
@@ -68,7 +68,9 @@ export default class InteractionCreate extends Event {
       if (!command) return
 
       if (command.disabled && !client.config.maintainers.includes(interaction.user.id)) {
-        return interaction.reply(':x: This command is disabled at the moment.')
+        return interaction.reply(interaction.translate('commands.disabled', {
+          format: 'capital'
+        }))
       }
 
       client.logger.log(`[Shard #${interaction.guild.shardId}] ${interaction.user.tag}(${interaction.user.id}) ran command ${command.name} on ${interaction.guild.name}(${interaction.guild.id}) in #${interaction.channel?.name}(${interaction.channel!.id}).`)
@@ -84,7 +86,7 @@ export default class InteractionCreate extends Event {
         this.output = await command.execute({ client, interaction, data })
       } catch (error: any) {
         client.logger.error(error instanceof Error ? error.stack : error)
-        return interaction.reply('\uD83D\uDEA7 An error occurred. Try again later.')
+        return interaction.reply(interaction.translate('errors.main'))
       }
 
       if (interaction.replied) return
@@ -92,7 +94,7 @@ export default class InteractionCreate extends Event {
       if (this.output) {
         interaction.reply(this.output).catch((error) => {
           console.error(error)
-          void interaction.followUp('\uD83D\uDEA7 An error occurred. Try again later.')
+          void interaction.followUp(interaction.translate('errors.main'))
         })
       }
     } catch (error: any) {
@@ -119,9 +121,13 @@ export default class InteractionCreate extends Event {
     const seconds = Math.round((userCooldown - Date.now()) / 1000)
 
     try {
-      return interaction.reply(`'You are in the cooldown zone, please wait another ${seconds > 1 ? `${seconds} seconds` : 'another second' }.`)
+      return interaction.reply(interaction.translate('commands.in-cooldown', {
+        seconds,
+        count: seconds,
+        format: 'capital'
+      }))
     } catch {
-      return interaction.reply('\uD83D\uDEA7 An error occurred. Try again later.')
+      return interaction.reply(interaction.translate('errors.main'))
     }
   }
 }

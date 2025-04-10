@@ -10,7 +10,6 @@ export default class Challenger extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'challenger',
-      description: () => 'Generates the "CHALLENGER" meme using your avatar.',
       cooldown: 5000,
       options: [
         {
@@ -22,17 +21,17 @@ export default class Challenger extends Command {
     })
   }
 
-  async execute(context: CommandContext) {
-    const userArg = context.interaction.options.getUser('user')
-    let { member } = context.interaction
+  async execute({ client, interaction }: CommandContext) {
+    const userArg = interaction.options.getUser('user')
+    let { member } = interaction
 
     if (userArg) {
-      if (context.interaction.guild.members.cache.has(userArg.id)) {
-        member = context.interaction.guild.members.cache.get(userArg.id)!
+      if (interaction.guild.members.cache.has(userArg.id)) {
+        member = interaction.guild.members.cache.get(userArg.id)!
       }
     }
 
-    const imageBuffer = await generateImage(context, {
+    const imageBuffer = await generateImage({ client, interaction }, {
       name: this.name,
       category: 'compose',
       params: {
@@ -40,7 +39,7 @@ export default class Challenger extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return 'The image is above 8MB, I can\'t display that.'
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('images.too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }

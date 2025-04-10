@@ -9,7 +9,6 @@ export default class Avatar extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'avatar',
-      description: () => 'Displays a specific user\'s avatar or your avatar.',
       options: [
         {
           name: 'user',
@@ -39,11 +38,15 @@ export default class Avatar extends Command {
     return {
       embeds: [
         {
-          image: { url: user.displayAvatarURL({ extension: 'png', size: 512 }) },
+          image: {
+            url: user.displayAvatarURL({ extension: 'png', size: 512 })
+          },
           fields: [
             {
-              name: 'Avatar',
-              value: `${user.username}\n\`Download links:\` ${formats.map((format) => `[${format.toUpperCase()}](${user.displayAvatarURL({ extension: format, size: 512 })})`).join(' | ')}`
+              name: interaction.translate('commands.avatar.name', {
+                format: 'capital'
+              }),
+              value: `${user.username}\n\`${interaction.translate('commands.avatar.download-links', { format: 'capital' })}\` ${formats.map((format) => `[${format.toUpperCase()}](${user.displayAvatarURL({ extension: format, size: 512 })})`).join(' | ')}`
             }
           ],
           color: 7154431
