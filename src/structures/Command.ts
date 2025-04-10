@@ -73,9 +73,16 @@ export class Command {
       this.description = options.description
     } else {
       const translationKey = `commands.${this.name}.description`
+
       this.description = (context) => {
         if (client.i18n.exists(translationKey)) {
-          return client.i18n.translate(context, translationKey)
+          return client.i18n.translate(
+            context,
+            translationKey,
+            {
+              format: 'capital'
+            }
+          )
         } else {
           return 'No description provided.'
         }
@@ -87,8 +94,13 @@ export class Command {
       appCommandDescription = options.description({ client })
     } else {
       const translationKey = `commands.${this.name}.description`
+
       if (client.i18n.exists(translationKey)) {
-        appCommandDescription = client.i18n.translate({ client }, translationKey)
+        appCommandDescription = client.i18n.translate(
+          { client },
+          translationKey,
+          { format: 'capital' }
+        )
       }
     }
 
@@ -100,14 +112,28 @@ export class Command {
     for (const lang of availableLanguages) {
       if (lang !== 'en-US') {
         const nameKey = `commands.${this.name}.name`
+
         if (client.i18n.exists(nameKey)) {
-          nameLocalizations[lang] = client.i18n.translate({ client }, nameKey, { lng: lang })
+          nameLocalizations[lang] = client.i18n.translate(
+            { client },
+            nameKey,
+            {
+              lng: lang
+            }
+          )
         }
       }
 
       const descKey = `commands.${this.name}.description`
       if (client.i18n.exists(descKey)) {
-        descriptionLocalizations[lang] = client.i18n.translate({ client }, descKey, { lng: lang })
+        descriptionLocalizations[lang] = client.i18n.translate(
+          { client },
+          descKey,
+          {
+            lng: lang,
+            format: 'capital'
+          }
+        )
       }
     }
 
