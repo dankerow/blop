@@ -54,6 +54,12 @@ prisma generate
 
 For more information, check the [Prisma documentation](https://www.prisma.io/docs/).
 
+## Running
+
+```bash
+pnpm start
+```
+
 ## Internationalization
 
 Blop comes with built-in internationalization support powered by [i18next](https://www.i18next.com/). This allows the bot to respond in multiple languages, providing a localized experience for users worldwide.
@@ -75,12 +81,6 @@ Languages are configured in the bot's config file. To add a new language:
 3. Restart the bot to load the new language
 
 The bot automatically detects available translations and will present commands and responses in the user's preferred language when available.
-
-## Running
-
-```bash
-pnpm start
-```
 
 ## Commands
 
