@@ -1,0 +1,244 @@
+{
+  "common": {
+    "enabled": "enabled",
+    "disabled": "disabled"
+  },
+  "keywords": {
+    "unknown": "unknown",
+    "server_one": "server",
+    "server_other": "servers",
+    "member_one": "member",
+    "member_other": "members",
+    "channel_one": "channel",
+    "channel_other": "channels",
+    "role_one": "role",
+    "role_other": "roles",
+    "emoji_one": "emoji",
+    "emoji_other": "emojis",
+    "user_one": "user",
+    "user_other": "users",
+    "category_one": "category",
+    "category_other": "categories",
+    "text": "text",
+    "none": "none",
+    "none-gender": "none"
+  },
+  "status": {
+    "online": "online",
+    "offline": "offline",
+    "idle": "idle",
+    "dnd": "do not disturb",
+    "streaming": "streaming"
+  },
+  "errors": {
+    "main": "\uD83D\uDEA7 An error occurred. Try again later!",
+    "file-too-large": "\uD83D\uDEA7 The image is above 8MB, I cannot display it."
+  },
+  "guild": {
+    "explicit-content": {
+      "without-role": "members without role",
+      "all-members": "all members"
+    },
+    "verification-level": {
+      "low": "low",
+      "medium": "medium"
+    }
+  },
+  "commands": {
+    "is-disabled": "this command is disabled.",
+    "in-cooldown_one": "you are in cooldown, please wait another second.",
+    "in-cooldown_other": "you are in cooldown, please wait {{seconds}} seconds.",
+    "administration": {
+      "name": "administration"
+    },
+    "language": {
+      "name": "language",
+      "description": "set the bot language on your guild.",
+      "current-language": "the current language of this guild is {{language}}.",
+      "already-set": "the language of this guild is already set to {{language}}.",
+      "language-changed": "the language of this guild has been set to {{language}}."
+    },
+    "modules": {
+      "name": "modules",
+      "description": "manage the bot modules.",
+      "embed": {
+        "description": "> To set up modules you must do `/modules set <type> <on/off>`.\n> To reset configured modules you must do `/modules reset <type>`.\n\nCurrent modules:\n\n{{modules}}"
+      },
+      "all-modules-reset": "all the configured modules were reset.",
+      "unknown-type": "this type isn't available.",
+      "provide-module-type": "please provide a module type.",
+      "module-not-available": "module type `{{moduleType}}` is not available. Valid types: `{{validTypes}}`.",
+      "provide-toggle-value": "please provide a toggle value `(on/off)`.",
+      "invalid-toggle-value": "invalid toggle value `{{value}}`. Please use `on` or `off`.",
+      "module-not-editable": "the `{{moduleType}}` module cannot be changed as it's marked as non-editable.",
+      "module-already-state": "the `{{moduleType}}` module is already `{{state}}`.",
+      "module-state-changed": "the `{{moduleType}}` module has been `{{state}}` successfully.",
+      "provide-module-or-all": "please provide a module type or \"all\".",
+      "all-modules-default": "all modules are already at their default configuration.",
+      "all-reset": "all modules have been reset to their default configuration.",
+      "default-not-found": "Cannot find default configuration for the `{{moduleType}}` module.",
+      "module-already-default": "The `{{moduleType}}` module is already at its default configuration.",
+      "module-reset": "the `{{moduleType}}` module has been reset to its default configuration."
+    },
+    "general": {
+      "name": "general"
+    },
+    "about": {
+      "name": "about",
+      "description": "gives information about the bot.",
+      "embed": {
+        "description": "{{clientUsername}} is a open-source Discord bot that is designed to help you with your server. It has a lot of features that can help you with moderation, fun, and utility. It is developed by {{maintainers}}.\n\nThe bot is running on version `{{version}}`, using discord.js library (version `{{discordJsVersion}}` - node v`{{nodeVersion}}`).",
+        "field-0": {
+          "name": "\\\uD83D\uDCC0 Hosting Server"
+        },
+        "field-1": {
+          "name": "\\\uD83D\uDCE1 Shards status"
+        },
+        "field-2": {
+          "name": "\\❤️ Links"
+        }
+      },
+      "no-shards": "no shards are online.",
+      "shards-info": "{{shardStats}} / {{shardCount}} shards are online. For more information do `/about --shards`."
+    },
+    "help": {
+      "name": "help",
+      "description": "displays all the available commands.",
+      "embed": {
+        "description": "to get more details about how to use commands, do `/help <command>`.\n**The bot works with command modules that can be enabled and disabled. To manage them, consult modules menu via the command `/modules`.**\n  \n[`GitHub`](https://github.com/dankerow/blop) | [`\uD83C\uDF88 Invite`](https://discord.com/api/oauth2/authorize?client_id=912113776176820234&permissions=2146958583&scope=bot)",
+        "footer": "<> means required command parameter | [] means optional command parameter"
+      },
+      "command": {
+        "missing": "command not found.",
+        "name": "{{name}}'s help menu"
+      }
+    },
+    "images": {
+      "name": "images"
+    },
+    "3d": {
+      "name": "3d",
+      "description": "applies a 3D effect to your avatar."
+    },
+    "achievement": {
+      "name": "achievement",
+      "description": "customize your Minecraft Achievement."
+    },
+    "beautiful": {
+      "name": "beautiful",
+      "description": "generates the Gravity Falls meme \"Oh this is beautiful\" using your avatar."
+    },
+    "blur": {
+      "name": "blur",
+      "description": "applies a blur effect on your avatar."
+    },
+    "blurple": {
+      "name": "blurple",
+      "description": "applies the blurpify effect on your avatar."
+    },
+    "bobross": {
+      "name": "bobross",
+      "description": "generates the Bobross meme using your avatar."
+    },
+    "challenger": {
+      "name": "challenger",
+      "description": "generates the \"CHALLENGER\" meme using your avatar."
+    },
+    "contrast": {
+      "name": "contrast",
+      "description": "applies a contrast effect to your avatar."
+    },
+    "distort": {
+      "name": "distort",
+      "description": "applies a distortion effect to your avatar."
+    },
+    "fade": {
+      "name": "fade",
+      "description": "applies a fade effect to your avatar."
+    },
+    "frame": {
+      "name": "frame",
+      "description": "generates your avatar with frame borders."
+    },
+    "greyscale": {
+      "name": "greyscale",
+      "description": "applies a grayscale effect on your avatar."
+    },
+    "invert": {
+      "name": "invert",
+      "description": "applies an inversion effect on your avatar."
+    },
+    "pixelate": {
+      "name": "pixelate",
+      "description": "applies a pixelation effect to your avatar."
+    },
+    "prison": {
+      "name": "prison",
+      "description": "draws prison bars over your avatar."
+    },
+    "rainbow": {
+      "name": "rainbow",
+      "description": "generates a rainbow effect using your avatar."
+    },
+    "rip": {
+      "name": "rip",
+      "description": "generates a R.I.P meme using your avatar."
+    },
+    "sepia": {
+      "name": "sepia",
+      "description": "applies a sepia filter to your avatar."
+    },
+    "triggered": {
+      "name": "triggered",
+      "description": "generates a triggered GIF using your avatar."
+    },
+    "wasted": {
+      "name": "wasted",
+      "description": "generates the \"WASTED\" meme using your avatar."
+    },
+    "worthless": {
+      "name": "worthless",
+      "description": "generates the \"WORTHLESS\" meme using your avatar."
+    },
+    "miscellaneous": {
+      "name": "miscellaneous"
+    },
+    "avatar": {
+      "name": "avatar",
+      "description": "displays a specific user's avatar or your avatar.",
+      "download-links": "download links"
+    },
+    "guild": {
+      "name": "guild",
+      "description": "displays the current guild information.",
+      "embed": {
+        "field-0": {
+          "name": "owner"
+        },
+        "field-1": {
+          "name": "verification level"
+        },
+        "field-2": {
+          "name": "explicit content"
+        },
+        "field-3": {
+          "name": "channels ({{channelCount}})",
+          "value": "`text channels` {{textChannelCount}} - `Voice channels` {{voiceChannelCount}} \n `AFK channel` {{afkChannel}} | `Timeout` {{afkTimeout}}"
+        },
+        "field-4": {
+          "value": "there are `{{roleCount}}` role(s) on the server, do `/guild --roles` to see them."
+        },
+        "field-5": {
+          "value": "there are `{{emojiCount}}` emote(s) on the server, do `/guild --emotes` to see them."
+        },
+        "field-6": {
+          "name": "members ({{memberCount}})"
+        }
+      }
+    },
+    "uptime": {
+      "name": "uptime",
+      "description": "gives the uptime of bot and server."
+    }
+  }
+}
