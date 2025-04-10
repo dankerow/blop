@@ -81,6 +81,23 @@ export class I18n {
       options.lng = ctx.interaction.locale
     }
 
-    return this.t(key, options)
+    let translated = this.t(key, options)
+  
+    const format = options.format
+    if (format) {
+      switch (format) {
+        case 'uppercase':
+          translated = translated.toUpperCase()
+          break
+        case 'capital':
+          translated = translated.charAt(0).toUpperCase() + translated.slice(1)
+          break
+        case 'lowercase':
+          translated = translated.toLowerCase()
+          break
+      }
+    }
+  
+    return translated
   }
 }
