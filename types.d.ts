@@ -7,7 +7,7 @@ import type {
   Snowflake
 } from 'discord.js'
 import type { Prisma } from '@prisma/client'
-import type { InitOptions, TOptions } from 'i18next'
+import type { InitOptions as I18NextInitOptions, TOptions as I18NextTOptions } from 'i18next'
 
 interface Language {
   iso: string
@@ -29,7 +29,7 @@ export interface Config {
   maintainers?: Snowflake[]
   i18n?: {
     languages: Language[]
-    options: InitOptions
+    options: I18NextInitOptions
   }
   apis?: APIList
   fetch?: {
@@ -94,6 +94,12 @@ export type CommandOutput = string | MessagePayload | InteractionReplyOptions | 
 
 declare module 'discord.js' {
   interface BaseInteraction {
-    translate(key: string, options: TOptions = {}): string
+    translate(key: string, options: I18NextTOptions = {}): string
+  }
+}
+
+declare module 'i18next' {
+  interface TOptionsBase {
+    format?: 'uppercase' | 'capital' | 'lowercase'
   }
 }
