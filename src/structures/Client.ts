@@ -65,7 +65,7 @@ export class Blop extends Client<true> {
     this.database = new PrismaClient()
     this.i18n = new I18n(this)
 
-    this.start()
+    void this.start()
   }
 
   /**
