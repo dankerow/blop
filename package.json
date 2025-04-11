@@ -7,7 +7,6 @@
   "type": "module",
   "scripts": {
     "start": "tsx .",
-    "start:staging": "pm2 start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "npx changelogen@latest --release"
