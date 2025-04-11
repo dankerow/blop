@@ -10,7 +10,7 @@ import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { Client, GatewayIntentBits, Options, Partials, REST, Routes } from 'discord.js'
-import { consola } from 'consola'
+import { consola, createConsola } from 'consola'
 import { PrismaClient } from '@prisma/client'
 
 const config = await loadConfig('.', _config)
@@ -50,7 +50,14 @@ export class Blop extends Client<true> {
       sweepers: Options.DefaultSweeperSettings
     })
 
-    this.logger = consola
+    this.logger = createConsola({
+      level: process.env.NODE_ENV === 'development' ? 4 : 3,
+      defaults: {
+        tag: 'Blop'
+      }
+    })
+    this.logger.wrapAll()
+
     this.config = config
 
     this.commands = []
