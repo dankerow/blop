@@ -31,8 +31,8 @@ export default class Help extends Command {
         embeds: [
           {
             author: {
-              name: interaction.translate('commands.help.command.name', {
-                name: interaction.translate(`commands.${command.name}.name`),
+              name: interaction.t('commands.help.command.name', {
+                name: interaction.t(`commands.${command.name}.name`),
                 format: 'capital'
               }),
               icon_url: client.user.displayAvatarURL()
@@ -50,10 +50,10 @@ export default class Help extends Command {
         icon_url: client.user.displayAvatarURL()
       },
       color: 7154431,
-      description: interaction.translate('commands.help.embed.description', { format: 'capital' }),
+      description: interaction.t('commands.help.embed.description', { format: 'capital' }),
       fields: [],
       footer: {
-        text: interaction.translate('commands.help.embed.footer')
+        text: interaction.t('commands.help.embed.footer')
       }
     }
 
@@ -69,8 +69,8 @@ export default class Help extends Command {
     })
 
     categories.sort((a, b) => {
-      const localizedA = interaction.translate(`commands.${a}.name`)
-      const localizedB = interaction.translate(`commands.${b}.name`)
+      const localizedA = interaction.t(`commands.${a}.name`)
+      const localizedB = interaction.t(`commands.${b}.name`)
 
       return localizedA.localeCompare(localizedB)
     })
@@ -80,8 +80,8 @@ export default class Help extends Command {
       if (commands.length < 1) return
 
       embed.fields!.push({
-        name: interaction.translate(`commands.${category}.name`, { format: 'capital' }),
-        value: `\`${commands.map((command) => interaction.translate(`commands.${command.name}.name`)).join('`, `')}\``
+        name: interaction.t(`commands.${category}.name`, { format: 'capital' }),
+        value: `\`${commands.map((command) => interaction.t(`commands.${command.name}.name`)).join('`, `')}\``
       })
     })
 

@@ -47,25 +47,6 @@ export class I18n {
   }
 
   /**
-   * @description Translates a given key using the i18n instance
-   * @param {string | string[]} key - The key to translate
-   * @param {TOptions} [options] - Additional translation options
-   * @returns {string}
-   */
-  t(key: string | string[], options?: TOptions): string {
-    return this.instance.t(key, options)
-  }
-
-  /**
-   * @description Checks if a given key exists in the i18n instance
-   * @param {string} key - The key to check
-   * @returns {boolean}
-   */
-  exists(key: string): boolean {
-    return this.instance.exists(key)
-  }
-
-  /**
    * Translates a given key using the i18n method of the client.
    *
    * @param {PartialCommandContext} ctx - The context object.
@@ -74,14 +55,14 @@ export class I18n {
    * @param {string} [options.lng] - The language to use for translation. Defaults to 'en-US'.
    * @returns {string} - The translated string.
    */
-  translate(ctx: PartialCommandContext, key: string, options: TOptions = {}): string {
+  t(ctx: PartialCommandContext, key: string, options: TOptions = {}): string {
     const availableLanguages = this.client.config.i18n.languages.map((lang) => lang.iso)
 
     if (ctx.interaction?.locale && availableLanguages.includes(ctx.interaction?.locale)) {
       options.lng = ctx.interaction.locale
     }
 
-    let translated = this.t(key, options)
+    let translated = this.instance.t(key, options)
   
     const format = options.format
     if (format) {
@@ -99,5 +80,14 @@ export class I18n {
     }
   
     return translated
+  }
+
+  /**
+   * @description Checks if a given key exists in the i18n instance
+   * @param {string} key - The key to check
+   * @returns {boolean}
+   */
+  exists(key: string): boolean {
+    return this.instance.exists(key)
   }
 }

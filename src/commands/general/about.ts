@@ -67,7 +67,7 @@ export default class About extends Command {
 
     if (interaction.options.getBoolean('shards')) {
       if (!client.shard) {
-        return interaction.translate('about.no-shards', {
+        return interaction.t('about.no-shards', {
           format: 'capital'
         })
       }
@@ -103,7 +103,7 @@ export default class About extends Command {
             name: client.user.username,
             icon_url: client.user.displayAvatarURL()
           },
-          description: interaction.translate('commands.about.embed.description', {
+          description: interaction.t('commands.about.embed.description', {
             clientUsername: client.user.username,
             maintainers,
             version,
@@ -113,24 +113,24 @@ export default class About extends Command {
           }),
           fields: [
             {
-              name: interaction.translate('commands.about.embed.field-0.name'),
+              name: interaction.t('commands.about.embed.field-0.name'),
               value: `**\`Platform\`**: \`${process.platform} - (${process.arch})\`\n**\`RSS\`**: \`${rss} MB\` - **\`RAM\`**: \`${heapUsed} MB\` / \`${Math.round(os.totalmem() / 1000000000)} GB\``,
               inline: false
             },
             {
-              name: interaction.translate('commands.about.embed.field-1.name'),
+              name: interaction.t('commands.about.embed.field-1.name'),
               value: client.shard ? 
-                  interaction.translate('commands.about.shards-info', { 
+                  interaction.t('commands.about.shards-info', { 
                     shardStats, 
                     shardCount: client.shard.count 
                   }) : 
-                  interaction.translate('commands.about.no-shards', {
+                  interaction.t('commands.about.no-shards', {
                     format: 'capital'
                   }),
               inline: false
             },
             {
-              name: interaction.translate('commands.about.embed.field-2.name'),
+              name: interaction.t('commands.about.embed.field-2.name'),
               value: '[GitHub](https://github.com/dankerow/blop)',
               inline: false
             }

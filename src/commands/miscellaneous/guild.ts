@@ -33,7 +33,7 @@ export default class Guild extends Command {
     let explicitContent: string
     switch (interaction.guild.explicitContentFilter) {
       case GuildExplicitContentFilter.Disabled:
-        explicitContent = interaction.translate('common.disabled')
+        explicitContent = interaction.t('common.disabled')
         break
       case GuildExplicitContentFilter.MembersWithoutRoles:
         explicitContent = 'Members without role'
@@ -42,20 +42,20 @@ export default class Guild extends Command {
         explicitContent = 'All members'
         break
       default:
-        explicitContent = interaction.translate('keywords.unknown')
+        explicitContent = interaction.t('keywords.unknown')
         break
     }
 
     let verificationLevel: string
     switch (interaction.guild.verificationLevel) {
       case GuildVerificationLevel.None:
-        verificationLevel = interaction.translate('keywords.none')
+        verificationLevel = interaction.t('keywords.none')
         break
       case GuildVerificationLevel.Low:
-        verificationLevel = interaction.translate('guild.verification-level.low')
+        verificationLevel = interaction.t('guild.verification-level.low')
         break
       case GuildVerificationLevel.Medium:
-        verificationLevel = interaction.translate('guild.verification-level.medium')
+        verificationLevel = interaction.t('guild.verification-level.medium')
         break
       case GuildVerificationLevel.High:
         verificationLevel = '(╯°□°）╯︵ ┻━┻'
@@ -64,7 +64,7 @@ export default class Guild extends Command {
         verificationLevel = '┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻'
         break
       default:
-        verificationLevel = interaction.translate('keywords.unknown')
+        verificationLevel = interaction.t('keywords.unknown')
         break
     }
 
@@ -79,10 +79,10 @@ export default class Guild extends Command {
         embeds: [
           {
             author: {
-              name: `${interaction.guild.name} - ${interaction.translate('keywords.role', { count: roles.length })}`,
+              name: `${interaction.guild.name} - ${interaction.t('keywords.role', { count: roles.length })}`,
               icon_url: interaction.guild.iconURL()
             },
-            description: roles.length ? trimArray(roles, 35).join(', ') : interaction.translate('keywords.none'),
+            description: roles.length ? trimArray(roles, 35).join(', ') : interaction.t('keywords.none'),
             color: 7154431
           }
         ]
@@ -92,10 +92,10 @@ export default class Guild extends Command {
         embeds: [
           {
             author: {
-              name: `${interaction.guild.name} - ${interaction.translate('keywords.emoji', { count: emotes.length })}`,
+              name: `${interaction.guild.name} - ${interaction.t('keywords.emoji', { count: emotes.length })}`,
               icon_url: interaction.guild.iconURL()
             },
-            description: emotes.length ? trimArray(emotes, 200).join(' - ') : interaction.translate('keywords.none'),
+            description: emotes.length ? trimArray(emotes, 200).join(' - ') : interaction.t('keywords.none'),
             color: 7154431
           }
         ]
@@ -112,28 +112,28 @@ export default class Guild extends Command {
           thumbnail: { url: interaction.guild.iconURL({ size: 512 }) },
           fields: [
             {
-              name: interaction.translate('commands.guild.embed.field-0.name', {
+              name: interaction.t('commands.guild.embed.field-0.name', {
                 format: 'capital'
               }),
               value: `<@${interaction.guild.ownerId}>`,
               inline: true
             },
             {
-              name: interaction.translate('commands.guild.embed.field-1.name', {
+              name: interaction.t('commands.guild.embed.field-1.name', {
                 format: 'capital'
               }),
               value: verificationLevel,
               inline: true
             },
             {
-              name: interaction.translate('commands.guild.embed.field-2.name', {
+              name: interaction.t('commands.guild.embed.field-2.name', {
                 format: 'capital'
               }),
               value: explicitContent,
               inline: true
             },
             {
-              name: interaction.translate('commands.guild.embed.field-3.name', {
+              name: interaction.t('commands.guild.embed.field-3.name', {
                 channelCount: interaction.guild.channels.cache.size,
                 format: 'capital'
               }),
@@ -141,29 +141,29 @@ export default class Guild extends Command {
               inline: false
             },
             {
-              name: interaction.translate('keywords.role', {
+              name: interaction.t('keywords.role', {
                 count: roles.length,
                 format: 'capital'
               }),
-              value: interaction.translate('commands.guild.embed.field-4.value', {
+              value: interaction.t('commands.guild.embed.field-4.value', {
                 roleCount: roles.length,
                 format: 'capital'
               }),
               inline: false
             },
             {
-              name: interaction.translate('keywords.emoji', {
+              name: interaction.t('keywords.emoji', {
                 count: emotes.length,
                 format: 'capital'
               }),
-              value: interaction.translate('commands.guild.embed.field-5.value', {
+              value: interaction.t('commands.guild.embed.field-5.value', {
                 emojiCount: emotes.length,
                 format: 'capital'
               }),
               inline: false
             },
             {
-              name: interaction.translate('commands.guild.embed.field-6.name', {
+              name: interaction.t('commands.guild.embed.field-6.name', {
                 memberCount: interaction.guild.memberCount,
                 format: 'capital'
               }),

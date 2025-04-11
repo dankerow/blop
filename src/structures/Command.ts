@@ -76,7 +76,7 @@ export class Command {
 
       this.description = (context) => {
         if (client.i18n.exists(translationKey)) {
-          return client.i18n.translate(
+          return client.i18n.t(
             context,
             translationKey,
             {
@@ -96,7 +96,7 @@ export class Command {
       const translationKey = `commands.${this.name}.description`
 
       if (client.i18n.exists(translationKey)) {
-        appCommandDescription = client.i18n.translate(
+        appCommandDescription = client.i18n.t(
           { client },
           translationKey,
           { format: 'capital' }
@@ -114,7 +114,7 @@ export class Command {
         const nameKey = `commands.${this.name}.name`
 
         if (client.i18n.exists(nameKey)) {
-          nameLocalizations[lang] = client.i18n.translate(
+          nameLocalizations[lang] = client.i18n.t(
             { client },
             nameKey,
             {
@@ -126,7 +126,7 @@ export class Command {
 
       const descKey = `commands.${this.name}.description`
       if (client.i18n.exists(descKey)) {
-        descriptionLocalizations[lang] = client.i18n.translate(
+        descriptionLocalizations[lang] = client.i18n.t(
           { client },
           descKey,
           {

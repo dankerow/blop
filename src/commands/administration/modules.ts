@@ -60,19 +60,19 @@ export default class Modules extends Command {
 
     if (!optionArg) {
       const modules = Object.entries(data.guild.modules).map(([type, config]) => {
-        return `**${type.charAt(0).toUpperCase() + type.slice(1)}**: ${config.enabled ? `\\✅ ${interaction.translate('common.enabled')}` : `\\❌ ${interaction.translate('common.disabled')}`}`
+        return `**${type.charAt(0).toUpperCase() + type.slice(1)}**: ${config.enabled ? `\\✅ ${interaction.t('common.enabled')}` : `\\❌ ${interaction.t('common.disabled')}`}`
       }).join('\n')
 
       return {
         embeds: [
           {
             author: {
-              name: interaction.translate('commands.modules.name', {
+              name: interaction.t('commands.modules.name', {
                 format: 'capital'
               }),
               icon_url: interaction.guild.iconURL()
             },
-            description: interaction.translate('commands.modules.embed.description', {
+            description: interaction.t('commands.modules.embed.description', {
               modules
             }),
             color: 7154431
@@ -85,7 +85,7 @@ export default class Modules extends Command {
 
     if (optionArg.toLowerCase() === 'set') {
       if (!typeArg) {
-        return interaction.translate('commands.modules.provide-module-type', {
+        return interaction.t('commands.modules.provide-module-type', {
           format: 'capital'
         })
       }
@@ -93,7 +93,7 @@ export default class Modules extends Command {
       const moduleType = typeArg.toLowerCase()
 
       if (!toggleArg) {
-        return interaction.translate('commands.modules.provide-toggle-value', {
+        return interaction.t('commands.modules.provide-toggle-value', {
           format: 'capital'
         })
       }
@@ -101,7 +101,7 @@ export default class Modules extends Command {
       const toggleValue = toggleArg.toLowerCase()
 
       if (!data.guild.modules[moduleType].editable) {
-        return interaction.translate('commands.modules.module-not-editable', {
+        return interaction.t('commands.modules.module-not-editable', {
           moduleType,
           format: 'capital'
         })
@@ -111,9 +111,9 @@ export default class Modules extends Command {
       const targetState = toggleValue === 'on'
        
       if (isEnabled === targetState) {
-        return interaction.translate('commands.modules.module-already-state', {
+        return interaction.t('commands.modules.module-already-state', {
           moduleType,
-          state: targetState ? interaction.translate('common.enabled').toLowerCase() : interaction.translate('common.disabled').toLowerCase(),
+          state: targetState ? interaction.t('common.enabled').toLowerCase() : interaction.t('common.disabled').toLowerCase(),
           format: 'capital'
         })
       }
@@ -141,16 +141,16 @@ export default class Modules extends Command {
         }
       })
 
-      return interaction.translate('commands.modules.module-state-changed', {
+      return interaction.t('commands.modules.module-state-changed', {
         moduleType,
-        state: toggleValue === 'on' ? interaction.translate('common.enabled').toLowerCase() : interaction.translate('common.disabled').toLowerCase(),
+        state: toggleValue === 'on' ? interaction.t('common.enabled').toLowerCase() : interaction.t('common.disabled').toLowerCase(),
         format: 'capital'
       })
     }
 
     if (optionArg.toLowerCase() === 'reset') {
       if (!typeArg) {
-        return interaction.translate('commands.modules.provide-module-or-all', {
+        return interaction.t('commands.modules.provide-module-or-all', {
           format: 'capital'
         })
       }
@@ -169,7 +169,7 @@ export default class Modules extends Command {
         })
         
         if (allAtDefault) {
-          return interaction.translate('commands.modules.all-modules-default', {
+          return interaction.t('commands.modules.all-modules-default', {
             format: 'capital'
           })
         }
@@ -191,7 +191,7 @@ export default class Modules extends Command {
           }
         })
 
-        return interaction.translate('commands.modules.all-reset', {
+        return interaction.t('commands.modules.all-reset', {
           format: 'capital'
         })
       }
@@ -200,7 +200,7 @@ export default class Modules extends Command {
         const defaultConfig = DEFAULT_MODULES[moduleType]
 
         if (!defaultConfig) {
-          return interaction.translate('commands.modules.default-not-found', {
+          return interaction.t('commands.modules.default-not-found', {
             moduleType,
             format: 'capital'
           })
@@ -209,7 +209,7 @@ export default class Modules extends Command {
         const currentModule = data.guild.modules[moduleType]
         if (currentModule.editable === defaultConfig.editable && 
             currentModule.enabled === defaultConfig.enabled) {
-          return interaction.translate('commands.modules.module-already-default', {
+          return interaction.t('commands.modules.module-already-default', {
             moduleType,
             format: 'capital'
           })
@@ -235,7 +235,7 @@ export default class Modules extends Command {
           }
         })
 
-        return interaction.translate('commands.modules.module-reset', {
+        return interaction.t('commands.modules.module-reset', {
           moduleType,
           format: 'capital'
         })

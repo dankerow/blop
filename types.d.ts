@@ -94,7 +94,7 @@ export type CommandOutput = string | MessagePayload | InteractionReplyOptions | 
 
 declare module 'discord.js' {
   interface BaseInteraction {
-    translate(key: string, options: I18NextTOptions = {}): string
+    t(key: string, options: I18NextTOptions = {}): string
   }
 }
 

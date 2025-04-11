@@ -59,8 +59,8 @@ export default class InteractionCreate extends Event {
         })
       }
 
-      interaction.translate = (key: string, options) => {
-        return client.i18n.translate({ client, interaction }, key, options)
+      interaction.t = (key: string, options) => {
+        return client.i18n.t({ client, interaction }, key, options)
       }
 
       const command = client.commands.filter((module) => module.name === interaction.commandName)[0]
@@ -68,7 +68,7 @@ export default class InteractionCreate extends Event {
       if (!command) return
 
       if (command.disabled && !client.config.maintainers.includes(interaction.user.id)) {
-        return interaction.reply(interaction.translate('commands.disabled', {
+        return interaction.reply(interaction.t('commands.disabled', {
           format: 'capital'
         }))
       }
@@ -86,7 +86,7 @@ export default class InteractionCreate extends Event {
         this.output = await command.execute({ client, interaction, data })
       } catch (error: any) {
         client.logger.error(error instanceof Error ? error.stack : error)
-        return interaction.reply(interaction.translate('errors.main'))
+        return interaction.reply(interaction.t('errors.main'))
       }
 
       if (interaction.replied) return
@@ -94,7 +94,7 @@ export default class InteractionCreate extends Event {
       if (this.output) {
         interaction.reply(this.output).catch((error) => {
           console.error(error)
-          void interaction.followUp(interaction.translate('errors.main'))
+          void interaction.followUp(interaction.t('errors.main'))
         })
       }
     } catch (error: any) {
@@ -121,13 +121,13 @@ export default class InteractionCreate extends Event {
     const seconds = Math.round((userCooldown - Date.now()) / 1000)
 
     try {
-      return interaction.reply(interaction.translate('commands.in-cooldown', {
+      return interaction.reply(interaction.t('commands.in-cooldown', {
         seconds,
         count: seconds,
         format: 'capital'
       }))
     } catch {
-      return interaction.reply(interaction.translate('errors.main'))
+      return interaction.reply(interaction.t('errors.main'))
     }
   }
 }

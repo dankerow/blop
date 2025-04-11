@@ -39,7 +39,7 @@ export default class Beautiful extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('images.too-large')
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.t('images.too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }

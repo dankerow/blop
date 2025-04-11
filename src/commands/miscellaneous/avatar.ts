@@ -43,10 +43,10 @@ export default class Avatar extends Command {
           },
           fields: [
             {
-              name: interaction.translate('commands.avatar.name', {
+              name: interaction.t('commands.avatar.name', {
                 format: 'capital'
               }),
-              value: `${user.username}\n\`${interaction.translate('commands.avatar.download-links', { format: 'capital' })}\` ${formats.map((format) => `[${format.toUpperCase()}](${user.displayAvatarURL({ extension: format, size: 512 })})`).join(' | ')}`
+              value: `${user.username}\n\`${interaction.t('commands.avatar.download-links', { format: 'capital' })}\` ${formats.map((format) => `[${format.toUpperCase()}](${user.displayAvatarURL({ extension: format, size: 512 })})`).join(' | ')}`
             }
           ],
           color: 7154431

@@ -42,7 +42,7 @@ export default class Achievement extends Command {
       }
     })
 
-    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.translate('errors.file-too-large')
+    if (Buffer.byteLength(imageBuffer) > 8e+6) return interaction.t('errors.file-too-large')
 
     return { files: [{ attachment: imageBuffer, name: `${this.name}.png` }] }
   }
