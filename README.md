@@ -60,6 +60,28 @@ For more information, check the [Prisma documentation](https://www.prisma.io/doc
 pnpm start
 ```
 
+## Internationalization
+
+Blop comes with built-in internationalization support powered by [i18next](https://www.i18next.com/). This allows the bot to respond in multiple languages, providing a localized experience for users worldwide.
+
+### Features
+
+- Multi-language command names and descriptions
+- Automatic translation of command responses
+- Support for user/server language preferences
+- Guild preferred language can be changed using the `/language` command
+- Discord's locale detection integration
+
+### Adding Languages
+
+Languages are configured in the bot's config file. To add a new language:
+
+1. Add language definition to the `i18n.languages` array in the config
+2. Create translation files in the `locales` directory
+3. Restart the bot to load the new language
+
+The bot automatically detects available translations and will present commands and responses in the user's preferred language when available.
+
 ## Commands
 
 > The bot works with command modules that can be enabled and disabled. To manage them, consult modules menu via the command `/modules`.

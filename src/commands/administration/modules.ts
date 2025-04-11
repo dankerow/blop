@@ -1,4 +1,4 @@
-import type { CommandContext, ModuleOptions } from '@/types'
+import type { CommandContext, ModuleOptions, PartialCommandContext } from '@/types'
 import type { Blop } from '@/structures'
 
 import { Command } from '@/structures'
@@ -17,7 +17,6 @@ export default class Modules extends Command {
     super(client, {
       _filename: import.meta.url,
       name: 'modules',
-      description: () => 'Manage the modules of the bot',
       options: [
         {
           name: 'option',
@@ -54,74 +53,80 @@ export default class Modules extends Command {
     })
   }
 
-  async execute(context: CommandContext) {
-    const optionArg = context.interaction.options.getString('option', false)
-    const typeArg = context.interaction.options.getString('type', false)
-    const toggleArg = context.interaction.options.getString('toggle', false)
+  async execute({ client, interaction, data }: CommandContext) {
+    const optionArg = interaction.options.getString('option', false)
+    const typeArg = interaction.options.getString('type', false)
+    const toggleArg = interaction.options.getString('toggle', false)
 
     if (!optionArg) {
-      const modules = Object.entries(context.data.guild.modules).map(([type, config]) => {
-        return `**${type.charAt(0).toUpperCase() + type.slice(1)}**: ${config.enabled ? '\\✅ Enabled' : '\\❌ Disabled'}`
+      const modules = Object.entries(data.guild.modules).map(([type, config]) => {
+        return `**${type.charAt(0).toUpperCase() + type.slice(1)}**: ${config.enabled ? `\\✅ ${interaction.t('common.enabled')}` : `\\❌ ${interaction.t('common.disabled')}`}`
       }).join('\n')
 
       return {
         embeds: [
           {
             author: {
-              name: 'Modules',
-              icon_url: context.interaction.guild.iconURL()
+              name: interaction.t('commands.modules.name', {
+                format: 'capital'
+              }),
+              icon_url: interaction.guild.iconURL()
             },
-            description: `> To set up modules you must do \`/modules set <type> <on/off>\`.\n> To reset configured modules you must do \`/modules reset <type>\`.\n\nCurrent modules:\n\n${modules}`,
+            description: interaction.t('commands.modules.embed.description', {
+              modules
+            }),
             color: 7154431
           }
         ]
       }
     }
 
-    const moduleTypes = Object.entries(context.data.guild.modules).map((module) => module[0])
-    const toggleModes = ['on', 'off']
+    const moduleTypes = Object.entries(data.guild.modules).map((module) => module[0])
 
     if (optionArg.toLowerCase() === 'set') {
       if (!typeArg) {
-        return 'Please provide a module type.'
+        return interaction.t('commands.modules.provide-module-type', {
+          format: 'capital'
+        })
       }
 
       const moduleType = typeArg.toLowerCase()
 
-      if (!moduleTypes.includes(moduleType)) {
-        return `Module type \`${moduleType}\` is not available. Valid types: \`${moduleTypes.join('`, `')}\`.`
-      }
-
       if (!toggleArg) {
-        return 'Please provide a toggle value `(on/off)`.'
+        return interaction.t('commands.modules.provide-toggle-value', {
+          format: 'capital'
+        })
       }
       
       const toggleValue = toggleArg.toLowerCase()
-      
-      if (!toggleModes.includes(toggleValue)) {
-        return `Invalid toggle value \`${toggleValue}\`. Please use \`on\` or \`off\`.`
-      }
-      
-      if (!context.data.guild.modules[moduleType].editable) {
-        return `The \`${moduleType}\` module cannot be changed as it's marked as non-editable.`
+
+      if (!data.guild.modules[moduleType].editable) {
+        return interaction.t('commands.modules.module-not-editable', {
+          moduleType,
+          format: 'capital'
+        })
       }
 
-      const isEnabled = context.data.guild.modules[moduleType].enabled
+      const isEnabled = data.guild.modules[moduleType].enabled
       const targetState = toggleValue === 'on'
        
       if (isEnabled === targetState) {
-        return `The \`${moduleType}\` module is already \`${targetState ? 'enabled' : 'disabled'}\`.`
+        return interaction.t('commands.modules.module-already-state', {
+          moduleType,
+          state: targetState ? interaction.t('common.enabled').toLowerCase() : interaction.t('common.disabled').toLowerCase(),
+          format: 'capital'
+        })
       }
 
-      const guildData = await context.client.database.guild.update({
+      const guildData = await client.database.guild.update({
         where: {
-          id: context.interaction.guild.id
+          id: interaction.guild.id
         },
         data: {
           modules: {
-            ...context.data.guild.modules,
+            ...data.guild.modules,
             [moduleType]: {
-              editable: context.data.guild.modules[moduleType].editable,
+              editable: data.guild.modules[moduleType].editable,
               enabled: toggleValue === 'on'
             }
           }
@@ -129,40 +134,49 @@ export default class Modules extends Command {
       })
 
       await this.refreshGuildCommands({
-        ...context,
+        client,
         data: {
-          ...context.data,
+          ...data,
           guild: guildData
         }
       })
 
-      return `The \`${moduleType}\` module has been \`${toggleValue === 'on' ? 'enabled' : 'disabled'}\` successfully.`
+      return interaction.t('commands.modules.module-state-changed', {
+        moduleType,
+        state: toggleValue === 'on' ? interaction.t('common.enabled').toLowerCase() : interaction.t('common.disabled').toLowerCase(),
+        format: 'capital'
+      })
     }
 
     if (optionArg.toLowerCase() === 'reset') {
       if (!typeArg) {
-        return 'Please provide a module type or "all".'
+        return interaction.t('commands.modules.provide-module-or-all', {
+          format: 'capital'
+        })
       }
 
       const moduleType = typeArg.toLowerCase()
 
       if (moduleType === 'all') {
-        const currentModules = context.data.guild.modules
+        const currentModules = data.guild.modules
         const allAtDefault = Object.keys(DEFAULT_MODULES).every(moduleKey => {
           const current = currentModules[moduleKey]
           const defaultModule = DEFAULT_MODULES[moduleKey]
+
           return current && 
                  current.editable === defaultModule.editable && 
                  current.enabled === defaultModule.enabled
         })
         
         if (allAtDefault) {
-          return 'All modules are already at their default configuration.'
+          return interaction.t('commands.modules.all-modules-default', {
+            format: 'capital'
+          })
         }
 
-        const guildData = await context.client.database.guild.update({
+        const guildData = await client.database.guild.update({
           where: {
-            id: context.interaction.guild.id
+            id: interaction.guild.id
           },
           data: {
             modules: undefined
@@ -170,57 +184,70 @@ export default class Modules extends Command {
         })
 
         await this.refreshGuildCommands({
-          ...context,
+          client,
           data: {
-            ...context.data,
+            ...data,
             guild: guildData
           }
         })
 
-        return 'All modules have been reset to their default configuration.'
+        return interaction.t('commands.modules.all-reset', {
+          format: 'capital'
+        })
       }
 
       if (moduleTypes.includes(moduleType)) {
         const defaultConfig = DEFAULT_MODULES[moduleType]
 
         if (!defaultConfig) {
-          return `Cannot find default configuration for the \`${moduleType}\` module.`
+          return interaction.t('commands.modules.default-not-found', {
+            moduleType,
+            format: 'capital'
+          })
         }
 
-        const currentModule = context.data.guild.modules[moduleType]
+        const currentModule = data.guild.modules[moduleType]
         if (currentModule.editable === defaultConfig.editable && 
             currentModule.enabled === defaultConfig.enabled) {
-          return `The \`${moduleType}\` module is already at its default configuration.`
+          return interaction.t('commands.modules.module-already-default', {
+            moduleType,
+            format: 'capital'
+          })
         }
         
-        const guildData = await context.client.database.guild.update({
+        const guildData = await client.database.guild.update({
           where: {
-            id: context.interaction.guild.id
+            id: interaction.guild.id
           },
           data: {
             modules: {
-              ...context.data.guild.modules,
+              ...data.guild.modules,
               [moduleType]: defaultConfig
             }
           }
         })
 
         await this.refreshGuildCommands({
-          ...context,
+          client,
           data: {
-            ...context.data,
+            ...data,
             guild: guildData
           }
         })
 
-        return `The \`${moduleType}\` module has been reset to its default configuration.`
+        return interaction.t('commands.modules.module-reset', {
+          moduleType,
+          format: 'capital'
+        })
       }
     }
   }
 
-  async refreshGuildCommands(context: CommandContext): Promise<void> {
+  async refreshGuildCommands(context: PartialCommandContext): Promise<void> {
     const { client, data } = context
-    
+
+    if (!data) return
+
     const rest = new REST().setToken(process.env.DISCORD_CLIENT_TOKEN ?? '')
     
     try {

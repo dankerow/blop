@@ -1,0 +1,244 @@
+{
+  "common": {
+    "enabled": "activé",
+    "disabled": "désactivé"
+  },
+  "keywords": {
+    "unknown": "inconnu",
+    "server_one": "serveur",
+    "server_other": "serveurs",
+    "member_one": "membre",
+    "member_other": "membres",
+    "channel_one": "salon",
+    "channel_other": "salons",
+    "role_one": "rôle",
+    "role_other": "rôles",
+    "emoji_one": "émoji",
+    "emoji_other": "émojis",
+    "user_one": "utilisateur",
+    "user_other": "utilisateurs",
+    "category_one": "catégorie",
+    "category_other": "catégories",
+    "text": "texte",
+    "none": "aucun",
+    "none-gender": "aucune"
+  },
+  "status": {
+    "online": "en ligne",
+    "offline": "hors-ligne",
+    "idle": "inactif",
+    "dnd": "ne pas déranger",
+    "streaming": "en streaming"
+  },
+  "errors": {
+    "main": "\uD83D\uDEA7 Une erreur est survenue. Réessayez plus tard!",
+    "file-too-large": "\uD83D\uDEA7 L'image est supérieure à 8 Mo, je ne peux pas l'afficher."
+  },
+  "guild": {
+    "explicit-content": {
+      "without-role": "membres sans rôle",
+      "all-members": "tous les membres"
+    },
+    "verification-level": {
+      "low": "faible",
+      "medium": "moyen"
+    }
+  },
+  "commands": {
+    "is-disabled": "cette commande est désactivée.",
+    "in-cooldown_one": "vous êtes en cooldown, veuillez patienter une seconde de plus.",
+    "in-cooldown_other": "vous êtes en cooldown, veuillez patienter {{seconds}} secondes.",
+    "administration": {
+      "name": "administration"
+    },
+    "language": {
+      "name": "langue",
+      "description": "définit la langue du bot sur votre serveur.",
+      "current-language": "la langue actuelle de ce serveur est {{language}}.",
+      "already-set": "la langue de ce serveur est déjà définie sur {{language}}.",
+      "language-changed": "la langue de ce serveur a été définie sur {{language}}."
+    },
+    "modules": {
+      "name": "modules",
+      "description": "gérer les modules du bot.",
+      "embed": {
+        "description": "> Pour configurer les modules, vous devez exécuter `/modules set <type> <on/off>`.\n> Pour réinitialiser les modules configurés, vous devez exécuter `/modules reset <type>`.\n\nModules actuels:\n\n{{modules}}"
+      },
+      "all-modules-reset": "tous les modules configurés ont étés réinitialisés.",
+      "unknown-type": "ce type n'est pas disponible.",
+      "provide-module-type": "veuillez fournir un type de module.",
+      "module-not-available": "le type de module `{{moduleType}}` n'est pas disponible. Types valides: `{{validTypes}}`.",
+      "provide-toggle-value": "veuillez fournir une valeur d'activation `(on/off)`.",
+      "invalid-toggle-value": "valeur d'activation invalide `{{value}}`. Veuillez utiliser `on` ou `off`.",
+      "module-not-editable": "le module `{{moduleType}}` ne peut pas être modifié car il est marqué comme non modifiable.",
+      "module-already-state": "le module `{{moduleType}}` est déjà `{{state}}`.",
+      "module-state-changed": "le module `{{moduleType}}` a été `{{state}}` avec succès.",
+      "provide-module-or-all": "veuillez fournir un type de module ou \"all\".",
+      "all-modules-default": "tous les modules sont déjà dans leur configuration par défaut.",
+      "all-reset": "tous les modules ont été réinitialisés à leur configuration par défaut.",
+      "default-not-found": "impossible de trouver la configuration par défaut pour le module `{{moduleType}}`.",
+      "module-already-default": "le module `{{moduleType}}` est déjà à sa configuration par défaut.",
+      "module-reset": "le module `{{moduleType}}` a été réinitialisé à sa configuration par défaut."
+    },
+    "general": {
+      "name": "général"
+    },
+    "about": {
+      "name": "info",
+      "description": "donne des informations à propos du bot.",
+      "embed": {
+        "description": "le bot fonctionne actuellement sur la version `{{version}}`, et utilise la librairie discord.js (v`{{discordJsVersion}}` - node v`{{nodeVersion}}`).",
+        "field-0": {
+          "name": "\\\uD83D\uDCC0 Serveur"
+        },
+        "field-1": {
+          "name": "\\\uD83D\uDCE1 Status des shards"
+        },
+        "field-2": {
+          "name": "\\❤️ Liens"
+        }
+      },
+      "no-shards": "Aucun shard n'est en ligne.",
+      "shards-info": "{{shardStats}} / {{shardCount}} shards sont en ligne. Pour plus d'informations, utilisez `/about --shards`."
+    },
+    "help": {
+      "name": "aide",
+      "description": "affiche toutes les commandes disponibles.",
+      "embed": {
+        "description": "aide aux commandes: `/help <commande>` pour plus de détails.\n\n**Le bot fonctionne avec des modules de commande qui peuvent être activés et désactivés. Pour les gérer, consultez le menu des modules via la commande `/modules`.**\n  \n[`GitHub`](https://github.com/dankerow/blop) | [`\uD83C\uDF88 Invitation`](https://discordapp.com/api/oauth2/authorize?client_id=434105937595465748&permissions=2146958583&scope=bot)",
+        "footer": "<> signifie paramètre de commande requis | [] signifie paramètre de commande optionnel"
+      },
+      "command": {
+        "missing": "la commande n'a pas été trouvée.",
+        "name": "aide de la commande {{name}}"
+      }
+    },
+    "images": {
+      "name": "images"
+    },
+    "3d": {
+      "name": "3d",
+      "description": "affiche une image manipulée avec un effet 3D."
+    },
+    "achievement": {
+      "name": "achievement",
+      "description": "personnalisez votre succès Minecraft."
+    },
+    "beautiful": {
+      "name": "beautiful",
+      "description": "affiche une image manipulée avec un meme de Gravity Falls \"Oh this is beautiful\"."
+    },
+    "blur": {
+      "name": "blur",
+      "description": "affiche une image manipulée avec un effect flou gaussien."
+    },
+    "blurple": {
+      "name": "blurple",
+      "description": "affiche une image manipulée avec l'effect blurpify."
+    },
+    "bobross": {
+      "name": "bobross",
+      "description": "affiche une image manipulée avec l'effet bobross."
+    },
+    "challenger": {
+      "name": "challenger",
+      "description": "affiche une image manipulée avec le meme \"CHALLENGER\" ."
+    },
+    "circle": {
+      "name": "cercle",
+      "description": "affiche une image manipulée ronde."
+    },
+    "contrast": {
+      "name": "contraste",
+      "description": "affiche une image avec un effet de contraste."
+    },
+    "distort": {
+      "name": "distorsion",
+      "description": "applique un effet de distorsion sur une image fournie."
+    },
+    "fade": {
+      "name": "fondu",
+      "description": "applique un filtre de fondu sur des images."
+    },
+    "frame": {
+      "name": "cadre",
+      "description": "construit une image avec des bordures."
+    },
+    "greyscale": {
+      "name": "greyscale",
+      "description": "affiche une image avec un effet grayscale."
+    },
+    "invert": {
+      "name": "invert",
+      "description": "affiche une image avec un effet d'inversion."
+    },
+    "pixelate": {
+      "name": "pixeliser",
+      "description": "affiche une image manipulée avec un effet pixelisé."
+    },
+    "prison": {
+      "name": "prison",
+      "description": "affiche des barreaux de prison sur des images."
+    },
+    "rip": {
+      "name": "rip",
+      "description": "affiche un meme R.I.P sur l'avatar d'un utilisateur."
+    },
+    "sepia": {
+      "name": "sepia",
+      "description": "applique un filtre sépia sur des images."
+    },
+    "triggered": {
+      "name": "triggered",
+      "description": "affiche un gif manipulé du meme triggered."
+    },
+    "wasted": {
+      "name": "wasted",
+      "description": "affiche une image manipulée avec le meme \"WASTED\"."
+    },
+    "worthless": {
+      "name": "worthless",
+      "description": "crèe une image avec le meme \"WORTHLESS\"."
+    },
+    "miscellaneous": {
+      "name": "divers"
+    },
+    "avatar": {
+      "name": "avatar",
+      "description": "affiche l'avatar d'un utilisateur ou le votre.",
+      "download-links": "liens de téléchargement"
+    },
+    "guild": {
+      "name": "serveur",
+      "description": "affiche les informations du serveur actuel.",
+      "embed": {
+        "field-0": {
+          "name": "propriétaire"
+        },
+        "field-1": {
+          "name": "niveau de vérification"
+        },
+        "field-2": {
+          "name": "contenu explicite"
+        },
+        "field-3": {
+          "name": "salons ({{channelCount}})",
+          "value": "`Salons textuels` {{textChannelCount}} - `Salons vocaux` {{voiceChannelCount}} \n `Salon d'inactivité` {{afkChannel}} | `Délai` {{afkTimeout}}"
+        },
+        "field-4": {
+          "value": "il y a `{{roleCount}}` rôles sur le serveur, do `/guild roles` pour les voir."
+        },
+        "field-5": {
+          "value": "il y a `{{emojiCount}}` émojis sur le serveur, do `/guild emotes` pour les voir."
+        },
+        "field-7": {
+          "name": " membres ({{memberCount}})"
+        }
+      }
+    },
+    "uptime": {
+      "name": "uptime",
+      "description": "donne le temps de fonctionnement du bot et du serveur."
+    }
+  }
+}

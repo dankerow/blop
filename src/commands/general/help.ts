@@ -3,18 +3,18 @@ import type { Blop } from '@/structures'
 import type { APIEmbed } from 'discord.js'
 
 import { Command } from '@/structures'
+import { ApplicationCommandOptionType } from 'discord.js'
 
 export default class Help extends Command {
   constructor(client: Blop) {
     super(client, {
       _filename: import.meta.url,
       name: 'help',
-      description: () => 'Displays all the available commands.',
       options: [
         {
           name: 'command',
           description: 'Display information about a specific command',
-          type: 3
+          type: ApplicationCommandOptionType.String
         }
       ]
     })
@@ -31,11 +31,14 @@ export default class Help extends Command {
         embeds: [
           {
             author: {
-              name: `Command Documentation: ${command.name}`,
+              name: interaction.t('commands.help.command.name', {
+                name: interaction.t(`commands.${command.name}.name`),
+                format: 'capital'
+              }),
               icon_url: client.user.displayAvatarURL()
             },
             color: 7154431,
-            description: command.description({ client })
+            description: command.description({ client, interaction })
           }
         ]
       }
@@ -43,14 +46,14 @@ export default class Help extends Command {
 
     const embed: APIEmbed = {
       author: {
-        name: `${client.user.username} Documentation`,
+        name: `${client.user.username}'s documentation`,
         icon_url: client.user.displayAvatarURL()
       },
       color: 7154431,
-      description: 'To get more details about how to use commands, do `/help <command>`.',
+      description: interaction.t('commands.help.embed.description', { format: 'capital' }),
       fields: [],
       footer: {
-        text: '<> means required command parameter | [] means optional command parameter'
+        text: interaction.t('commands.help.embed.footer')
       }
     }
 
@@ -58,20 +61,28 @@ export default class Help extends Command {
 
     client.commands.forEach((command) => {
       if (!categories.includes(command.category)) {
+        if (data.guild.modules[command.category.toLowerCase()] &&
+        !data.guild.modules[command.category.toLowerCase()].enabled) return
+
         categories.push(command.category)
       }
+    })
+
+    categories.sort((a, b) => {
+      const localizedA = interaction.t(`commands.${a}.name`)
+      const localizedB = interaction.t(`commands.${b}.name`)
+
+      return localizedA.localeCompare(localizedB)
     })
 
     categories.forEach((category) => {
       const commands = client.commands.filter((module) => module.category === category)
       if (commands.length < 1) return
 
-      if (data.guild.modules[category.toLowerCase()] && data.guild.modules[category.toLowerCase()].enabled) {
-        embed.fields!.push({
-          name: category,
-          value: `\`${commands.map((command) => command.name).join('`, `')}\``
-        })
-      }
+      embed.fields!.push({
+        name: interaction.t(`commands.${category}.name`, { format: 'capital' }),
+        value: `\`${commands.map((command) => interaction.t(`commands.${command.name}.name`)).join('`, `')}\``
+      })
     })
 
     return { embeds: [embed] }

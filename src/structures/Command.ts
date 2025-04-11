@@ -52,6 +52,8 @@ export class Command {
   public applicationCommandBody: {
     name: string
     description: string
+    name_localizations?: Record<string, string>
+    description_localizations?: Record<string, string>
     options: APIApplicationCommandOption[]
     dm_permission: boolean
   }
@@ -66,11 +68,80 @@ export class Command {
     this._filename = options._filename
     this.name = options.name
     this.category = options.category || 'miscellaneous'
-    this.description = options.description
+
+    if (options.description) {
+      this.description = options.description
+    } else {
+      const translationKey = `commands.${this.name}.description`
+
+      this.description = (context) => {
+        if (client.i18n.exists(translationKey)) {
+          return client.i18n.t(
+            context,
+            translationKey,
+            {
+              format: 'capital'
+            }
+          )
+        } else {
+          return 'No description provided.'
+        }
+      }
+    }
+
+    let appCommandDescription = 'No description provided.'
+    if (options.description) {
+      appCommandDescription = options.description({ client })
+    } else {
+      const translationKey = `commands.${this.name}.description`
+
+      if (client.i18n.exists(translationKey)) {
+        appCommandDescription = client.i18n.t(
+          { client },
+          translationKey,
+          { format: 'capital' }
+        )
+      }
+    }
+
+    const nameLocalizations: Record<string, string> = {}
+    const descriptionLocalizations: Record<string, string> = {}
+
+    const availableLanguages = client.config.i18n.languages.map(lang => lang.iso)
+
+    for (const lang of availableLanguages) {
+      if (lang !== 'en-US') {
+        const nameKey = `commands.${this.name}.name`
+
+        if (client.i18n.exists(nameKey)) {
+          nameLocalizations[lang] = client.i18n.t(
+            { client },
+            nameKey,
+            {
+              lng: lang
+            }
+          )
+        }
+      }
+
+      const descKey = `commands.${this.name}.description`
+      if (client.i18n.exists(descKey)) {
+        descriptionLocalizations[lang] = client.i18n.t(
+          { client },
+          descKey,
+          {
+            lng: lang,
+            format: 'capital'
+          }
+        )
+      }
+    }
 
     this.applicationCommandBody = {
       name: options.name,
-      description: options.description({ client }),
+      description: appCommandDescription,
+      name_localizations: Object.keys(nameLocalizations).length > 0 ? nameLocalizations : undefined,
+      description_localizations: Object.keys(descriptionLocalizations).length > 0 ? descriptionLocalizations : undefined,
       options: options.options ?? [],
       dm_permission: false
     }

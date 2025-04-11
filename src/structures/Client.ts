@@ -4,6 +4,7 @@ import type { APIApplicationCommand, ClientEvents } from 'discord.js'
 import type { ConsolaInstance } from 'consola'
 
 import _config from '@/config'
+import { I18n } from '@/services'
 import { loadConfig } from '@/utils/configLoader'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -22,8 +23,9 @@ const config = await loadConfig('.', _config)
 export class Blop extends Client<true> {
   public logger: ConsolaInstance
   public config: ResolvedConfig
-  public commands: Command[]
   public database: PrismaClient
+  public i18n: I18n
+  public commands: Command[]
   private readonly events: { [K in keyof ClientEvents]: (...args: any[]) => void }
   constructor() {
     super({
@@ -54,6 +56,7 @@ export class Blop extends Client<true> {
     this.commands = []
     this.events = {} as { [K in keyof ClientEvents]: (...args: any[]) => void }
     this.database = new PrismaClient()
+    this.i18n = new I18n(this)
 
     this.start()
   }
@@ -76,6 +79,8 @@ export class Blop extends Client<true> {
     if (process.env.NODE_ENV === 'development') this.on('debug', (debug) => this.logger.debug(debug))
     // Enable warning logger provided by Discord.js
     this.on('warn', (warn) => this.logger.warn(warn))
+
+    await this.i18n.init()
 
     await this.commandsModulesLoader()
     await this.eventModulesLoader()
