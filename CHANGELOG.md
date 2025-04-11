@@ -1,6 +1,46 @@
 # Changelog
 
 
+## v0.3.0
+
+[compare changes](https://github.com/dankerow/blop/compare/v0.2.3...v0.3.0)
+
+### 🚀 Enhancements
+
+- Replace GuildEmojisAndStickers intent (deprecated) with GuildExpressions ([f6bd1d9](https://github.com/dankerow/blop/commit/f6bd1d9))
+- Define `dirs` object as always existing on resolved config type ([544ddcf](https://github.com/dankerow/blop/commit/544ddcf))
+- Implement database with prisma ([#26](https://github.com/dankerow/blop/pull/26))
+- ⚠️  Implement guild modules ([#31](https://github.com/dankerow/blop/pull/31))
+- ⚠️  Implement internationalization ([#32](https://github.com/dankerow/blop/pull/32))
+- Create custom consola instance ([263cd68](https://github.com/dankerow/blop/commit/263cd68))
+- Add internationalization example configuration ([e3c200c](https://github.com/dankerow/blop/commit/e3c200c))
+
+### 🩹 Fixes
+
+- Simplify interaction reply handling ([7b24441](https://github.com/dankerow/blop/commit/7b24441))
+- Remove unused catch parameter ([3d730cf](https://github.com/dankerow/blop/commit/3d730cf))
+- Remove unused consola import ([6534d4e](https://github.com/dankerow/blop/commit/6534d4e))
+- Ensure start method is called without awaiting ([ed2cd78](https://github.com/dankerow/blop/commit/ed2cd78))
+- Correct image format type ([77ec26f](https://github.com/dankerow/blop/commit/77ec26f))
+
+### 🌊 Types
+
+- Update CommandOutput type to use MessagePayload and InteractionReplyOptions ([e43cf33](https://github.com/dankerow/blop/commit/e43cf33))
+
+### 🏡 Chore
+
+- Fix broken lockfile ([9675588](https://github.com/dankerow/blop/commit/9675588))
+- Remove unused start:staging script ([3efc62f](https://github.com/dankerow/blop/commit/3efc62f))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Implement guild modules ([#31](https://github.com/dankerow/blop/pull/31))
+- ⚠️  Implement internationalization ([#32](https://github.com/dankerow/blop/pull/32))
+
+### ❤️ Contributors
+
+- Dan ([@dankerow](https://github.com/dankerow))
+
 ## v0.2.3
 
 [compare changes](https://github.com/dankerow/blop/compare/v0.2.2...v0.2.3)
