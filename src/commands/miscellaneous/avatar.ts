@@ -31,9 +31,11 @@ export default class Avatar extends Command {
       }
     }
 
-    const formats = ['webp', 'png', 'jpg', 'jpeg']
+    const formats = ['webp', 'png', 'jpg', 'jpeg'] as const
+    type ImageFormat = typeof formats[number] | 'gif'
+    const imageFormats: ImageFormat[] = [...formats]
 
-    if (user.avatar && user.avatar.startsWith('a_')) formats.push('gif')
+    if (user.avatar && user.avatar.startsWith('a_')) imageFormats.push('gif')
 
     return {
       embeds: [
@@ -43,10 +45,10 @@ export default class Avatar extends Command {
           },
           fields: [
             {
-              name: interaction.t('commands.avatar.name', {
-                format: 'capital'
-              }),
-              value: `${user.username}\n\`${interaction.t('commands.avatar.download-links', { format: 'capital' })}\` ${formats.map((format) => `[${format.toUpperCase()}](${user.displayAvatarURL({ extension: format, size: 512 })})`).join(' | ')}`
+              name: interaction.t('commands.avatar.name'),
+              value: `${user.username}\n\`${interaction.t('commands.avatar.download-links', { format: 'capital' })}\` ${imageFormats.map((format) => 
+                `[${format.toUpperCase()}](${user.displayAvatarURL({ extension: format, size: 512 })})`
+              ).join(' | ')}`
             }
           ],
           color: 7154431
