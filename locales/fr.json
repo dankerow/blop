@@ -231,7 +231,7 @@
         "field-5": {
           "value": "il y a `{{emojiCount}}` émojis sur le serveur, do `/guild emotes` pour les voir."
         },
-        "field-7": {
+        "field-6": {
           "name": " membres ({{memberCount}})"
         }
       }
