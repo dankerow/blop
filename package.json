@@ -18,7 +18,7 @@
     "consola": "^3.4.2",
     "dayjs": "^1.11.13",
     "discord.js": "^14.18.0",
-    "i18next": "^24.2.3",
+    "i18next": "^25.0.0",
     "i18next-fs-backend": "^2.6.0",
     "ofetch": "^1.4.1",
     "prisma": "^6.5.0"
