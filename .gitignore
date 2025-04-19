@@ -46,6 +46,7 @@ dist
 
 # IDE / Editor
 .idea
+.vscode
 
 # macOS
 .DS_Store
@@ -59,3 +60,6 @@ dist
 
 # Config files
 /src/config.ts
+
+# Prisma
+prisma/client
