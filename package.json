@@ -9,6 +9,7 @@
     "start": "tsx .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prepare": "npx prisma generate",
     "release": "npx changelogen@latest --release"
   },
   "author": "Dan Mutombo",
