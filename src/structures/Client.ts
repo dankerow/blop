@@ -11,7 +11,7 @@ import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { Client, GatewayIntentBits, Options, Partials, REST, Routes } from 'discord.js'
 import { createConsola } from 'consola'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@/prisma/client'
 
 const config = await loadConfig('.', _config)
 

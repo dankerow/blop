@@ -6,7 +6,7 @@ import type {
   MessagePayload,
   Snowflake
 } from 'discord.js'
-import type { Prisma } from '@prisma/client'
+import type { Prisma } from './prisma/client'
 import type { InitOptions as I18NextInitOptions, TOptions as I18NextTOptions } from 'i18next'
 
 interface Language {
