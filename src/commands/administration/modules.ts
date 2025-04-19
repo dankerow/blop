@@ -36,6 +36,7 @@ export default class Modules extends Command {
             { name: 'General', value: 'general' },
             { name: 'Images', value: 'images' },
             { name: 'Miscellaneous', value: 'miscellaneous' },
+            { name: 'Logs', value: 'logs' },
             { name: 'All', value: 'all' }
           ]
         },
