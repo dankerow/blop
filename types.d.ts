@@ -57,9 +57,16 @@ export interface ModuleOptions {
   [key: string]: ModuleConfig
 }
 
+export interface GuildChannelConfig {
+  [moduleId: string]: {
+    [channelType: string]: string | null
+  }
+}
+
 declare global {
   namespace PrismaJson {
     type GuildModules = ModuleOptions
+    type GuildChannels = GuildChannelConfig
   }
 }
 
