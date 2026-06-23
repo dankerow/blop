@@ -20,7 +20,7 @@
     "consola": "^3.4.2",
     "dayjs": "^1.11.21",
     "discord.js": "^14.26.4",
-    "dotenv": "^16.6.1",
+    "dotenv": "^17.4.2",
     "i18next": "^25.10.10",
     "i18next-fs-backend": "^2.6.6",
     "ofetch": "^1.5.1",
