@@ -26,5 +26,8 @@
     }
   ],
   "prConcurrentLimit": 30,
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "postUpdateOptions": [
+    "pnpmDedupe"
+  ]
 }
