@@ -6,6 +6,7 @@
   "main": "src/main.ts",
   "type": "module",
   "scripts": {
+    "build": "tsc --noEmit",
     "start": "tsx .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
