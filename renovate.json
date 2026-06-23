@@ -5,10 +5,9 @@
     "group:allNonMajor"
   ],
   "minimumReleaseAge": "25 hours",
-  "commitMessagePrefix": "chore(deps):",
-  "commitMessageAction": "bump",
-  "commitMessageExtra": "to {{newValue}}",
-  "commitMessageTopic": "{{depName}}",
+  "npm": {
+    "commitMessageTopic": "{{prettyDepType}} {{depName}}"
+  },
   "dependencyDashboard": true,
   "rebaseWhen": "conflicted",
   "ignoreDeps": [],
