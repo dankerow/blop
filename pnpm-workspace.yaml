@@ -1,0 +1,8 @@
+verifyDepsBeforeRun: install
+
+allowBuilds:
+  '@prisma/engines': true
+  esbuild: true
+  prisma: true
+
+minimumReleaseAge: 1440
