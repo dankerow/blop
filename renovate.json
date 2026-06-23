@@ -4,6 +4,7 @@
     "config:recommended",
     "group:allNonMajor"
   ],
+  "minimumReleaseAge": "25 hours",
   "commitMessagePrefix": "chore(deps):",
   "commitMessageAction": "bump",
   "commitMessageExtra": "to {{newValue}}",
