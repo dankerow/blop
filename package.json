@@ -15,29 +15,29 @@
   },
   "author": "Dan Mutombo",
   "dependencies": {
-    "@prisma/client": "7.8.0",
+    "@prisma/client": "7.9.1",
     "c12": "^3.3.4",
     "common-tags": "^1.8.2",
     "consola": "^3.4.2",
-    "dayjs": "^1.11.21",
-    "discord.js": "^14.26.4",
+    "dayjs": "^1.11.23",
+    "discord.js": "^14.27.0",
     "dotenv": "^16.6.1",
     "i18next": "^25.10.10",
-    "i18next-fs-backend": "^2.6.6",
+    "i18next-fs-backend": "^2.6.7",
     "ofetch": "^1.5.1",
-    "prisma": "^7.8.0",
-    "prisma-json-types-generator": "^5.1.0",
-    "tsx": "^4.22.4"
+    "prisma": "^7.9.1",
+    "prisma-json-types-generator": "^5.1.1",
+    "tsx": "^4.23.12"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
+    "@eslint/js": "^9.39.5",
     "@stylistic/eslint-plugin-ts": "^4.4.1",
     "@types/common-tags": "^1.8.4",
-    "@types/node": "^22.20.0",
-    "eslint": "^9.39.4",
+    "@types/node": "^22.20.1",
+    "eslint": "^9.39.5",
     "eslint-plugin-import": "^2.32.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.61.1"
+    "typescript-eslint": "^8.68.0"
   },
-  "packageManager": "pnpm@11.8.0"
+  "packageManager": "pnpm@11.24.0"
 }
